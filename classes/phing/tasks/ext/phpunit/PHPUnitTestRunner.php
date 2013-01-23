@@ -26,7 +26,7 @@ require_once 'phing/system/util/Timer.php';
 /**
  * Simple Testrunner for PHPUnit that runs all tests of a testsuite.
  *
- * @author Michiel Rook <michiel.rook@gmail.com>
+ * @author Michiel Rook <mrook@php.net>
  * @version $Id$
  * @package phing.tasks.ext.phpunit
  * @since 2.1.0
@@ -178,7 +178,13 @@ class PHPUnitTestRunner extends PHPUnit_Runner_BaseTestRunner implements PHPUnit
     
     protected function composeMessage($message, PHPUnit_Framework_Test $test, Exception $e)
     {
-        return "Test $message (" . $test->getName() . " in class " . get_class($test) . "): " . $e->getMessage();
+        $message = "Test $message (" . $test->getName() . " in class " . get_class($test) . "): " . $e->getMessage();
+        
+        if ($e instanceof PHPUnit_Framework_ExpectationFailedException && $e->getComparisonFailure()) {
+            $message .= "\n" . $e->getComparisonFailure()->getDiff();
+        }
+        
+        return $message;
     }
 
     /**

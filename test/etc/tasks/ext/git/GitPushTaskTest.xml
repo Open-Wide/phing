@@ -2,7 +2,17 @@
 <project name="gitPushTest" default="invalid">
 
     <property name="tmp.dir" value="./../../../../tmp/git" />
+    <property name="bundle.dir" value="phing-tests.git"/>
+    <property name="repo.dir" value="./../../../../tmp/repo" />
+    
     <resolvepath propertyName="tmp.dir.resolved" file="${tmp.dir}" />
+    <resolvepath propertyName="bundle.dir.resolved" file="${bundle.dir}" />
+    <resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" />
+    
+    <delete dir="${repo.dir.resolved}" />
+    <gitclone
+    	repository="${bundle.dir.resolved}"
+    	targetPath="${repo.dir.resolved}" />
 
     <target name="invalid">
         <fail>This file should only be run via a testcase</fail>
@@ -10,7 +20,7 @@
 
     <target name="allParamsSet" description="all parameters present">
         <gitclone 
-            repository="git@github.com:farazdagi/phing-tests.git"
+            repository="${repo.dir.resolved}"
             targetPath="${tmp.dir.resolved}" />
         <gitpush
             repository="${tmp.dir.resolved}" 
@@ -20,7 +30,7 @@
 
     <target name="wrongRepo" description="all parameters present">
         <gitclone 
-            repository="git@github.com:farazdagi/phing-tests.git"
+            repository="${repo.dir.resolved}"
             targetPath="${tmp.dir.resolved}" />
         <gitpush
             repository="plain-wrong" 
@@ -34,7 +44,7 @@
 
     <target name="noDestination" description="Required param checking">
         <gitclone 
-            repository="git@github.com:farazdagi/phing-tests.git"
+            repository="${repo.dir.resolved}"
             targetPath="${tmp.dir.resolved}" />
         <gitpush
             repository="${tmp.dir.resolved}" destination="" />
@@ -42,7 +52,7 @@
 
     <target name="allReposSet" description="git-push --all">
         <gitclone 
-            repository="git@github.com:farazdagi/phing-tests.git"
+            repository="${repo.dir.resolved}"
             targetPath="${tmp.dir.resolved}" />
         <gitpush
             repository="${tmp.dir.resolved}" all="true" />
@@ -50,7 +60,7 @@
 
     <target name="tagsSet" description="git-push --tags">
         <gitclone 
-            repository="git@github.com:farazdagi/phing-tests.git"
+            repository="${repo.dir.resolved}"
             targetPath="${tmp.dir.resolved}" />
         <gitpush
             repository="${tmp.dir.resolved}" 
@@ -59,7 +69,7 @@
 
     <target name="mirrorSet" description="git-push --tags">
         <gitclone 
-            repository="git@github.com:farazdagi/phing-tests.git"
+            repository="${repo.dir.resolved}"
             targetPath="${tmp.dir.resolved}" />
         <gitpush
             repository="${tmp.dir.resolved}" 
@@ -67,7 +77,7 @@
     </target>
     <target name="deleteSet" description="git-push --tags">
         <gitclone 
-            repository="git@github.com:farazdagi/phing-tests.git"
+            repository="${repo.dir.resolved}"
             targetPath="${tmp.dir.resolved}" />
         <gitpush
             repository="${tmp.dir.resolved}" 
@@ -80,7 +90,7 @@
 
     <target name="deleteSet" description="git-push --tags">
         <gitclone 
-            repository="git@github.com:farazdagi/phing-tests.git"
+            repository="${repo.dir.resolved}"
             targetPath="${tmp.dir.resolved}" />
         <gitpush
             repository="${tmp.dir.resolved}" 

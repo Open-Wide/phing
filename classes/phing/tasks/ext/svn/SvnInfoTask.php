@@ -94,19 +94,33 @@ class SvnInfoTask extends SvnBaseTask
     function main()
     {
         $this->setup('info');
+        
+        if ($this->oldVersion) {
+            $output = $this->run(array('--xml', '--incremental'));
 
-        $output = $this->run(array('--xml', '--incremental'));
+            if (!($xmlObj = @simplexml_load_string($output))) {
+                throw new BuildException("Failed to parse the output of 'svn info --xml'.");
+            }
             
-        if ($xmlObj = @simplexml_load_string($output)) {
             $object = $xmlObj->{$this->element};
             
             if (!empty($this->subElement)) {
                 $object = $object->{$this->subElement};
             }
-                
-            $this->project->setProperty($this->getPropertyName(), (string) $object);
         } else {
-            throw new BuildException("Failed to parse the output of 'svn info --xml'.");
+            $output = $this->run();
+            
+            if (empty($output) || !isset($output['entry'][0])) {
+                throw new BuildException("Failed to parse the output of 'svn info'.");
+            }
+            
+            $object = $output['entry'][0][$this->element];
+            
+            if (!empty($this->subElement)) {
+                $object = $object[$this->subElement];
+            }
         }
+        
+        $this->project->setProperty($this->getPropertyName(), (string) $object);
     }
 }

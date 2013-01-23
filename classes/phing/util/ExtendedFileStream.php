@@ -25,7 +25,7 @@
     /**
      * Extended file stream wrapper class which auto-creates directories
      *
-     * @author Michiel Rook <michiel.rook@gmail.com>
+     * @author Michiel Rook <mrook@php.net>
      * @version $Id$
      * @package phing.util
      */
@@ -56,6 +56,11 @@
         
         function stream_open($path, $mode, $options, &$opened_path)
         {
+            // if we're on Windows, urldecode() the path again
+            if (FileSystem::getFileSystem()->getSeparator() == '\\') {
+                $path = urldecode($path);
+            }
+            
             $filepath = substr($path, 8);
             
             $this->createDirectories(dirname($filepath));

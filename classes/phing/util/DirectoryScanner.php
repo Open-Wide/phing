@@ -106,12 +106,12 @@ include_once 'phing/types/selectors/SelectorUtils.php';
  * internally (like split()) are not used. Only the _fast_ string functions
  * and comparison operators (=== !=== etc) are used for matching and tokenizing.
  *
- *  @author   Arnout J. Kuiper, ajkuiper@wxs.nl
- *  @author   Magesh Umasankar, umagesh@rediffmail.com
- *  @author   Andreas Aderhold, andi@binarycloud.com
+ * @author   Arnout J. Kuiper, ajkuiper@wxs.nl
+ * @author   Magesh Umasankar, umagesh@rediffmail.com
+ * @author   Andreas Aderhold, andi@binarycloud.com
  *
- *  @version   $Revision$
- *  @package   phing.util
+ * @version   $Id$
+ * @package   phing.util
  */
 class DirectoryScanner implements SelectorScanner {
 
@@ -132,7 +132,12 @@ class DirectoryScanner implements SelectorScanner {
         "**/._*",
         "**/.DS_Store",
     	"**/.darcs",
-    	"**/.darcs/**"
+    	"**/.darcs/**",
+    	"**/.git",
+    	"**/.git/**",
+    	"**/.gitattributes",
+    	"**/.gitignore",
+    	"**/.gitmodules",
     );
 
     /** The base directory which should be scanned. */

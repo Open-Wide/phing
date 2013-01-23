@@ -97,6 +97,10 @@
 				<td>Full path to current buildfile.</td>
 			</tr>
 			<tr>
+				<td>phing.dir</td>
+				<td>Path that contains the current buildfile.</td>
+			</tr>
+			<tr>
 				<td>phing.home</td>
 				<td>Phing installation directory, not set in <em>PEAR</em>
 					installations.</td>
@@ -164,7 +168,10 @@
 			</tr>
 			<tr>
 				<td>-l -list</td>
-				<td>List all available targets in buildfile</td>
+				<td>List all available targets in buildfile
+				(excluding targets that have their
+				<em>hidden</em> attribute set to
+				<em>true</em>)</td>
 			</tr>
 			<tr>
 				<td>-q -quiet</td>
@@ -262,15 +269,16 @@
 			</tr>
 			<tr>
 				<td>-1</td>
-				<td>Parameter error occured, printed help screen</td>
+				<td>Parameter or configuration error occurred</td>
 			</tr>
 			<tr>
 				<td>0</td>
-				<td>Successful execution, no warnings, no errors</td>
+				<td>Successful execution (build succeeded), no errors
+				(there may be warnings)</td>
 			</tr>
 			<tr>
 				<td>1</td>
-				<td>Successful execution, but warnings occured</td>
+				<td>Unsuccessful execution (build failed), errors occurred</td>
 			</tr>
 		</tbody>
 

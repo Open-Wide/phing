@@ -31,13 +31,21 @@ require_once 'phing/util/PearPackageScanner.php';
  * @package phing.util
  */
 class PearPackageScannerTest extends BuildFileTest 
-{ 
-
-    /**
-     * @expectedException PHPUnit_Framework_Error_Deprecated
-     */
+{
+    protected $backupGlobals = false;
+    
+    public function setUp() 
+    {
+        //needed for PEAR's Config and Registry classes
+        error_reporting(error_reporting() & ~E_DEPRECATED & ~E_NOTICE & ~E_STRICT);
+    }
+    
     public function testLoadPackageInfo()
     {
+        if (version_compare(PHP_VERSION, '5.3.2') < 0) {
+            $this->markTestSkipped("Need PHP 5.3.2+ for this test");
+        }
+        
         $ppfs = new PearPackageScanner();
         $ppfs->setPackage('console_getopt');
 
@@ -56,6 +64,10 @@ class PearPackageScannerTest extends BuildFileTest
      */
     public function testLoadPackageInfoNonexistingPackage()
     {
+        if (version_compare(PHP_VERSION, '5.3.2') < 0) {
+            $this->markTestSkipped("Need PHP 5.3.2+ for this test");
+        }
+        
         $ppfs = new PearPackageScanner();
         $ppfs->setPackage('this_package_does_not_exist');
 
@@ -74,9 +86,6 @@ class PearPackageScannerTest extends BuildFileTest
         $ppfs->setRole(null);
     }
 
-    /**
-     * @expectedException PHPUnit_Framework_Error_Deprecated
-     */
     public function testScanRoleDocCorrectDirectory()
     {
         $pps = new PearPackageScanner();
@@ -128,4 +137,3 @@ class PearPackageScannerTest extends BuildFileTest
     }
 
 }
-?>

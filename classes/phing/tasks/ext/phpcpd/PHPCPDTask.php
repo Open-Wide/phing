@@ -20,6 +20,7 @@
  */
 
 require_once 'phing/Task.php';
+require_once 'phing/tasks/ext/phpcpd/PHPCPDFormatterElement.php';
 
 /**
  * Runs PHP Copy & Paste Detector. Checking PHP files for duplicated code.
@@ -89,31 +90,6 @@ class PHPCPDTask extends Task
     protected $_formatters = array();
 
     /**
-     * Load the necessary environment for running PHPCPD.
-     *
-     * @throws BuildException - if the phpcpd classes can't be loaded.
-     */
-    public function init()
-    {
-        /**
-         * Determine PHPCPD installation
-         */
-        @include_once 'PHPCPD/Autoload.php';
-
-        if (! class_exists('PHPCPD_TextUI_Command')) {
-            throw new BuildException(
-                'PHPCPDTask depends on PHPCPD being installed '
-                . 'and on include_path.',
-                $this->getLocation()
-            );
-        }
-
-        // Other dependencies that should only be loaded
-        // when class is actually used
-        require_once 'phing/tasks/ext/phpcpd/PHPCPDFormatterElement.php';
-    }
-
-    /**
      * Set the input source file or directory.
      *
      * @param PhingFile $file The input source file or directory.
@@ -135,18 +111,6 @@ class PHPCPDTask extends Task
     public function addFileSet(FileSet $fs)
     {
         $this->_filesets[] = $fs;
-    }
-
-    /**
-     * Sets the minimum rule priority.
-     *
-     * @param integer $minimumPriority Minimum rule priority.
-     *
-     * @return void
-     */
-    public function setMinimumPriority($minimumPriority)
-    {
-        $this->_minimumPriority = $minimumPriority;
     }
 
     /**
@@ -239,10 +203,34 @@ class PHPCPDTask extends Task
     /**
      * Executes PHPCPD against PhingFile or a FileSet
      *
+     * @throws BuildException - if the phpcpd classes can't be loaded.
      * @return void
      */
     public function main()
     {
+        /**
+         * Determine PHPCPD installation
+         */
+        $oldVersion = false;
+        
+        if (!@include_once('SebastianBergmann/PHPCPD/autoload.php')) {
+            if (!@include_once('PHPCPD/Autoload.php')) {
+                throw new BuildException(
+                    'PHPCPDTask depends on PHPCPD being installed '
+                    . 'and on include_path.',
+                    $this->getLocation()
+                );
+            }
+            
+            $oldVersion = true;
+        } else {
+            if (version_compare(PHP_VERSION, '5.3.0') < 0) {
+                throw new BuildException("The PHPCPD task now requires PHP 5.3+");
+            }
+            
+            $oldVersion = false;
+        }
+        
         if (!isset($this->_file) and count($this->_filesets) == 0) {
             throw new BuildException(
                 "Missing either a nested fileset or attribute 'file' set"
@@ -277,8 +265,16 @@ class PHPCPDTask extends Task
         }
 
         $this->log('Processing files...');
-
-        $detector = new PHPCPD_Detector(new PHPCPD_Detector_Strategy_Default());
+        
+        if ($oldVersion) {
+            $detectorClass = 'PHPCPD_Detector';
+            $strategyClass = 'PHPCPD_Detector_Strategy_Default';
+        } else {
+            $detectorClass = '\\SebastianBergmann\\PHPCPD\\Detector\\Detector';
+            $strategyClass = '\\SebastianBergmann\\PHPCPD\\Detector\\Strategy\\DefaultStrategy';
+        }
+        
+        $detector = new $detectorClass(new $strategyClass);
         $clones   = $detector->copyPasteDetection(
             $filesToParse,
             $this->_minLines,

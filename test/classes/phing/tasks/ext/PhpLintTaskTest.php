@@ -43,7 +43,7 @@ class PhpLintTaskTest extends BuildFileTest {
     public function testSyntaxError()
     {
         $this->executeTarget(__FUNCTION__);
-        $this->assertInLogs("Parse error: syntax error, unexpected T_ENCAPSED_AND_WHITESPACE in");
+        $this->assertInLogs("Parse error: syntax error, unexpected");
     }
 
     /**
@@ -52,7 +52,7 @@ class PhpLintTaskTest extends BuildFileTest {
     public function testDeprecated()
     {
         $this->executeTarget(__FUNCTION__);
-        $this->assertInLogs("Deprecated: Assigning the return value of new by reference is deprecated in");
+        $this->assertInLogs("Assigning the return value of new by reference is deprecated in");
     }
 
     public function testHaltOnFailure()

@@ -25,7 +25,7 @@ include_once 'phing/system/lang/NullPointerException.php';
 /**
  * An abstract representation of file and directory pathnames.
  *
- * @version   $Revision$
+ * @version   $Id$
  * @package   phing.system.io
  */
 class PhingFile {
@@ -445,15 +445,15 @@ class PhingFile {
      * @return boolean true if and only if the file denoted by this
      *                 abstract pathname exists; false otherwise
      */
-    function exists() {                
+    function exists() {
         clearstatcache();
-        
+
         if (is_link($this->path)) {
             return true;
-        } else if ($this->isFile()) {
-            return @file_exists($this->path) || is_link($this->path);
+        } else if ($this->isDirectory()) {
+            return true;
         } else {
-            return @is_dir($this->path);
+            return @file_exists($this->path) || is_link($this->path);
         }
     }
 
@@ -892,7 +892,7 @@ class PhingFile {
      * Returns the path to the temp directory.
      * @return string
      */
-    function getTempDir() {
+    public static function getTempDir() {
         return Phing::getProperty('php.tmpdir');
     }
 

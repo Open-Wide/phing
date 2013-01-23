@@ -24,250 +24,257 @@
 			the tasks. So if you are searching for the reference to the <code>&lt;phplint&gt;</code>
 			tag, for example, you will want to look at the reference of PhpLintTask. </p>
 			
-        <h2>
-	        <a name="ApiGenTask"></a>ApiGenTask
-	    </h2>
-	    <p>
-	        This task runs <a href="http://apigen.org/" target="_blank">ApiGen</a>,
-	        a tool for creating professional API documentation from PHP source code,
-	        similar to discontinued phpDocumentor/phpDoc.
-	    </p>
-	    <h3>Attributes</h3>
-	    <table>
-	        <thead>
-	            <tr>
-	                <th>Name</th>
-	                <th>Type</th>
-	                <th>Description</th>
-	                <th>Default</th>
-	                <th>Required</th>
-	            </tr>
-	        </thead>
-	        <tbody>
-	            <tr>
-	                <td>executable</td>
-	                <td>String</td>
-	                <td>ApiGen executable name.</td>
-	                <td>apigen</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>config</td>
-	                <td>String</td>
-	                <td>Config file name.</td>
-	                <td>n/a</td>
-	                <td rowspan="2">Source and destination are required - either set explicitly
-	                    or using a config file. Attribute values set explicitly have precedence
-	                    over values from a config file.</td>
-	            </tr>
-	            <tr>
-	                <td>source</td>
-	                <td>String</td>
-	                <td>List of source files or directories.</td>
-	                <td>n/a</td>
-	            </tr>
-	            <tr>
-	                <td>destination</td>
-	                <td>String</td>
-	                <td>Destination directory.</td>
-	                <td>n/a</td>
-	            </tr>
-	            <tr>
-	                <td>exclude</td>
-	                <td>String</td>
-	                <td>List of masks (case sensitive) to exclude files or directories from processing.</td>
-	                <td>n/a</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>skipdocpath</td>
-	                <td>String</td>
-	                <td>List of masks (case sensitive) to exclude elements from documentation generating.</td>
-	                <td>n/a</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>skipdocprefix</td>
-	                <td>String</td>
-	                <td>Name prefix (case sensitive) to exclude elements from documentation generating.</td>
-	                <td>n/a</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>charset</td>
-	                <td>String</td>
-	                <td>Character set of source files.</td>
-	                <td>UTF-8</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>main</td>
-	                <td>String</td>
-	                <td>Main project name prefix.</td>
-	                <td>n/a</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>title</td>
-	                <td>String</td>
-	                <td>Title of generated documentation.</td>
-	                <td>n/a</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>baseurl</td>
-	                <td>String</td>
-	                <td>Documentation base URL.</td>
-	                <td>n/a</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>googlecseid</td>
-	                <td>String</td>
-	                <td>Google Custom Search ID.</td>
-	                <td>n/a</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>googlecselabel</td>
-	                <td>String</td>
-	                <td>Google Custom Search label.</td>
-	                <td>n/a</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>googleanalytics</td>
-	                <td>String</td>
-	                <td>Google Analytics tracking code.</td>
-	                <td>n/a</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>templateconfig</td>
-	                <td>String</td>
-	                <td>Template config file name.</td>
-	                <td>n/a</td>
-	                <td>If not set the default template is used.</td>
-	            </tr>
-	            <tr>
-	                <td>allowedhtml</td>
-	                <td>String</td>
-	                <td>List of HTML tags allowed in the documentation.</td>
-	                <td>b,i,a,ul,ol,li,p,br,var,samp,kbd,tt</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>groups</td>
-	                <td>String</td>
-	                <td>How should elements be grouped in the menu.</td>
-	                <td>auto</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>autocomplete</td>
-	                <td>String</td>
-	                <td>Element types for search input autocomplete.</td>
-	                <td>classes,constants,functions</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>accesslevels</td>
-	                <td>String</td>
-	                <td>Element access levels. Documentation only for methods and properties
-	                    with the given access level will be generated.</td>
-	                <td>public,protected</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>internal</td>
-	                <td>Boolean</td>
-	                <td>Whether to generate documentation for elements marked as internal
-	                    and internal documentation parts or not.</td>
-	                <td>No</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>php</td>
-	                <td>Boolean</td>
-	                <td>Whether to generate documentation for PHP internal classes or not.</td>
-	                <td>Yes</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>tree</td>
-	                <td>Boolean</td>
-	                <td>Whether to generate tree view of classes, interfaces, traits
-	                    and exceptions or not.</td>
-	                <td>Yes</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>deprecated</td>
-	                <td>Boolean</td>
-	                <td>Whether to generate documentation for deprecated elements or not.</td>
-	                <td>No</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>todo</td>
-	                <td>Boolean</td>
-	                <td>Whether to generate documentation of tasks or not.</td>
-	                <td>No</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>sourcecode</td>
-	                <td>Boolean</td>
-	                <td>Whether to generate highlighted source code files or not.</td>
-	                <td>Yes</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>download</td>
-	                <td>Boolean</td>
-	                <td>Whether to generate a link to download documentation as a ZIP archive or not.</td>
-	                <td>No</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>report</td>
-	                <td>String</td>
-	                <td>File name for checkstyle report of poorly documented elements.</td>
-	                <td>n/a</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>wipeout</td>
-	                <td>Boolean</td>
-	                <td>Whether to wipe out the destination directory first or not.</td>
-	                <td>Yes</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>quiet</td>
-	                <td>Boolean</td>
-	                <td>Whether to enable scaning and generating messages or not.</td>
-	                <td>No</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>updatecheck</td>
-	                <td>Boolean</td>
-	                <td>Whether to check for ApiGen updates or not.</td>
-	                <td>No</td>
-	                <td>No</td>
-	            </tr>
-	            <tr>
-	                <td>debug</td>
-	                <td>Boolean</td>
-	                <td>Whether to enable the debug mode or not.</td>
-	                <td>No</td>
-	                <td>No</td>
-	            </tr>
-	        </tbody>
-	    </table>
-	    <h3>Examples</h3>
-	    <pre>
+		<h2>
+			<a name="ApiGenTask"></a>ApiGenTask
+		</h2>
+		<p>
+			This task runs <a href="http://apigen.org/" target="_blank">ApiGen</a>,
+			a tool for creating professional API documentation from PHP source code,
+			similar to discontinued phpDocumentor/phpDoc.
+		</p>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>executable</td>
+					<td>String</td>
+					<td>ApiGen executable name.</td>
+					<td>apigen</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>config</td>
+					<td>String</td>
+					<td>Config file name.</td>
+					<td>n/a</td>
+					<td rowspan="2">Source and destination are required - either set explicitly
+						or using a config file. Attribute values set explicitly have precedence
+						over values from a config file.</td>
+				</tr>
+				<tr>
+					<td>source</td>
+					<td>String</td>
+					<td>List of source files or directories.</td>
+					<td>n/a</td>
+				</tr>
+				<tr>
+					<td>destination</td>
+					<td>String</td>
+					<td>Destination directory.</td>
+					<td>n/a</td>
+				</tr>
+				<tr>
+					<td>extensions</td>
+					<td>String</td>
+					<td>List of allowed file extensions.</td>
+					<td>php</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>exclude</td>
+					<td>String</td>
+					<td>List of masks (case sensitive) to exclude files or directories from processing.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>skipdocpath</td>
+					<td>String</td>
+					<td>List of masks (case sensitive) to exclude elements from documentation generating.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>skipdocprefix</td>
+					<td>String</td>
+					<td>Name prefix (case sensitive) to exclude elements from documentation generating.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>charset</td>
+					<td>String</td>
+					<td>Character set of source files.</td>
+					<td>auto</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>main</td>
+					<td>String</td>
+					<td>Main project name prefix.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>title</td>
+					<td>String</td>
+					<td>Title of generated documentation.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>baseurl</td>
+					<td>String</td>
+					<td>Documentation base URL.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>googlecseid</td>
+					<td>String</td>
+					<td>Google Custom Search ID.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>googlecselabel</td>
+					<td>String</td>
+					<td>Google Custom Search label.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>googleanalytics</td>
+					<td>String</td>
+					<td>Google Analytics tracking code.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>templateconfig</td>
+					<td>String</td>
+					<td>Template config file name.</td>
+					<td>n/a</td>
+					<td>If not set the default template is used.</td>
+				</tr>
+				<tr>
+					<td>allowedhtml</td>
+					<td>String</td>
+					<td>List of HTML tags allowed in the documentation.</td>
+					<td>b,i,a,ul,ol,li,p,br,var,samp,kbd,tt</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>groups</td>
+					<td>String</td>
+					<td>How should elements be grouped in the menu.</td>
+					<td>auto</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>autocomplete</td>
+					<td>String</td>
+					<td>Element types for search input autocomplete.</td>
+					<td>classes,constants,functions</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>accesslevels</td>
+					<td>String</td>
+					<td>Element access levels. Documentation only for methods and properties
+						with the given access level will be generated.</td>
+					<td>public,protected</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>internal</td>
+					<td>Boolean</td>
+					<td>Whether to generate documentation for elements marked as internal
+						and internal documentation parts or not.</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>php</td>
+					<td>Boolean</td>
+					<td>Whether to generate documentation for PHP internal classes or not.</td>
+					<td>Yes</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>tree</td>
+					<td>Boolean</td>
+					<td>Whether to generate tree view of classes, interfaces, traits
+						and exceptions or not.</td>
+					<td>Yes</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>deprecated</td>
+					<td>Boolean</td>
+					<td>Whether to generate documentation for deprecated elements or not.</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>todo</td>
+					<td>Boolean</td>
+					<td>Whether to generate documentation of tasks or not.</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>sourcecode</td>
+					<td>Boolean</td>
+					<td>Whether to generate highlighted source code files or not.</td>
+					<td>Yes</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>download</td>
+					<td>Boolean</td>
+					<td>Whether to generate a link to download documentation as a ZIP archive or not.</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>report</td>
+					<td>String</td>
+					<td>File name for checkstyle report of poorly documented elements.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>wipeout</td>
+					<td>Boolean</td>
+					<td>Whether to wipe out the destination directory first or not.</td>
+					<td>Yes</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>quiet</td>
+					<td>Boolean</td>
+					<td>Whether to enable scaning and generating messages or not.</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>updatecheck</td>
+					<td>Boolean</td>
+					<td>Whether to check for ApiGen updates or not.</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>debug</td>
+					<td>Boolean</td>
+					<td>Whether to enable the debug mode or not.</td>
+					<td>No</td>
+					<td>No</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Examples</h3>
+		<pre>
 &lt;apigen
 &nbsp;&nbsp;source=&quot;classes&quot;
 &nbsp;&nbsp;destination=&quot;api&quot;
@@ -296,6 +303,85 @@ file_put_contents('/www/live/testcases/coverage.data', serialize(xdebug_get_code
 &nbsp;&nbsp;&lt;/fileset&gt;
 &lt;/coverage-merger&gt;
 </pre>
+
+<h2>
+            <a name="ComposerTask"></a>ComposerTask
+        </h2>
+        <p>Executes Composer commands</p>
+        <h3>Examples</h3>
+        <p>Simple example</p>
+<pre>
+            &lt;composer command=&quot;install&quot;/&gt;
+</pre>
+        <p>Complex example</p>
+<pre>
+            &lt;composer command=&quot;install&quot;&gt;
+                &lt;arg value=&quot;--dev&quot; /&gt;
+            &lt;/composer&gt;
+</pre>
+        <h3>Attributes</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Default</th>
+                    <th>Required</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>command</td>
+                    <td>string</td>
+                    <td>The Composer command to execute</td>
+                    <td>n/a</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>composer</td>
+                    <td>string</td>
+                    <td>The path to composer application</td>
+                    <td>composer.phar</td>
+                    <td>no</td>
+                </tr>
+                <tr>
+                    <td>php</td>
+                    <td>string</td>
+                    <td>The path to the php executable</td>
+                    <td>php</td>
+                    <td>no</td>
+                </tr>
+            </tbody>
+            
+        </table>
+        <h3>Supported Nested Tags</h3>
+        <ul>
+            <li>Arg
+            <h3>Attributes</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Default</th>
+                    <th>Required</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>value</td>
+                    <td>string</td>
+                    <td>the value for the argument</td>
+                    <td>n/a</td>
+                    <td>no</td>
+                </tr>
+            </tbody>
+            
+        </table>
+            </li>
+        </ul>
 		<h2>
 			<a name="CoverageReportTask"></a>CoverageReportTask </h2>
 		<p>The CoverageReportTask formats a coverage database into a framed HTML report using XSLT.
@@ -627,10 +713,30 @@ file_put_contents('/www/live/testcases/coverage.data', serialize(xdebug_get_code
 					<td>999</td>
 					<td>No</td>
 				</tr>
+				<tr>
+					<td>appliedBy</td>
+					<td>String</td>
+					<td>Value of the 'applied_by' column
+					for each entry in the changelog table</td>
+					<td>dbdeploy</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>checkall</td>
+					<td>Boolean</td>
+					<td>False means dbdeploy will only apply patches that have a higher number
+						than the last patchnumber that was applied
+						True means dbdeploy will apply all changes that aren't applied
+						already (in ascending order)</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>
 			</tbody>
 		</table>
 		<h2>
 			<a name="DocBloxTask"></a>DocBloxTask </h2>
+		<p><b>This task is now deprecated in favor of the <a
+			href="#PhpDocumentor2Task">PhpDocumentor2Task</a>.</b></p>
 		<p> This task runs <a href="http://www.docblox-project.org/" target="_blank">DocBlox</a>, a
 			PHP 5.3-compatible API documentation tool. </p>
 		<h3>Attributes</h3>
@@ -659,6 +765,13 @@ file_put_contents('/www/live/testcases/coverage.data', serialize(xdebug_get_code
 					<td>n/a</td>
 					<td>Yes</td>
 				</tr>
+                <tr>
+					<td>template</td>
+					<td>String</td>
+					<td>Name of the DocBlox template to use.</td>
+					<td>default</td>
+					<td>No</td>
+				</tr>
 				<tr>
 					<td>quiet</td>
 					<td>Boolean</td>
@@ -675,7 +788,8 @@ file_put_contents('/www/live/testcases/coverage.data', serialize(xdebug_get_code
 		<h3>Examples</h3>
 		<pre>
 &lt;docblox title=&quot;API Documentation&quot;
-  destdir=&quot;apidocs&quot;&gt;
+  destdir=&quot;apidocs&quot;
+  template=&quot;new_black&quot;&gt;
    &lt;fileset dir=&quot;./classes&quot;&gt;
       &lt;include name=&quot;**/*.php&quot; /&gt;
    &lt;/fileset&gt;
@@ -725,7 +839,7 @@ file_put_contents('/www/live/testcases/coverage.data', serialize(xdebug_get_code
 		<h3>Example</h3>
 		<pre>
 &lt;filehash file="${builddir}/${tarball}.tar.${compression}" /&gt;
-&lt;echo "Hashvalue is; ${filehashvalue}" /&gt;
+&lt;echo msg="Hashvalue is; ${filehashvalue}" /&gt;
 </pre>
 		<h3>Attributes</h3>
 		<table>
@@ -762,6 +876,121 @@ file_put_contents('/www/live/testcases/coverage.data', serialize(xdebug_get_code
 				</tr>
 			</tbody>
 		</table>
+		<h2>
+			<a name="FileSyncTask"></a>FileSyncTask </h2>
+		<p>Syncs files or directories using the rsync command. Syncing can be done on the 
+		   same server or from/to a remote server.</p>
+		<h3>Example</h3>
+		<pre>
+&lt;sync sourcedir="/var/www/development/project1" destinationdir="/var/www/project1" /&gt;
+
+&lt;sync
+sourcedir="/var/www/development/project1"
+destinationdir="user@server:/var/www/project1"
+dryrun="true"
+itemizechanges="true"
+verbose="true"
+checksum="true" /&gt;
+</pre>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>rsyncPath</td>
+					<td>String</td>
+					<td>Path to rsync command</td>
+					<td>/usr/bin/rsync</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>sourceDir</td>
+					<td>String</td>
+					<td>Source directory (with user&amp;host for remote sources)</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>destinationDir</td>
+					<td>String</td>
+					<td>Destination directory (with user&amp;host for remote destinations)</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>excludeFile</td>
+					<td>String</td>
+					<td>Excluded patterns file</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>backupDir</td>
+					<td>String</td>
+					<td>Creates a backup so users can rollback to an existing restore point</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>options</td>
+					<td>String</td>
+					<td>Any options that rsync supports, removes the default options</td>
+					<td>-rpKz</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>verbose</td>
+					<td>Boolean</td>
+					<td>This option increases the amount of information you are given during the transfer</td>
+					<td>True</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>dryRun</td>
+					<td>Boolean</td>
+					<td>This option makes rsync perform a trial run that doesn't make any changes</td>
+					<td>False</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>itemizeChanges</td>
+					<td>Boolean</td>
+					<td>This option requests a simple itemized list of the changes that are being made to each file, including attribute changes</td>
+					<td>False</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>checksum</td>
+					<td>Boolean</td>
+					<td>This option will cause rsync to skip files based on checksum, not mod-time &amp; size</td>
+					<td>False</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>delete</td>
+					<td>Boolean</td>
+					<td>This option deletes files that don't exist on sender after transfer including 'force' and 'ignore-errors'</td>
+					<td>False</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>identityFile</td>
+					<td>String</td>
+					<td>Identity file for ssh authentication of a remote transfer</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+			</tbody>
+		</table>
+
 		<h2>
 			<a name="FileSizeTask"></a>FileSizeTask </h2>
 		<p>Stores the size of a specified file in a property. The file size is returned in
@@ -889,6 +1118,33 @@ file_put_contents('/www/live/testcases/coverage.data', serialize(xdebug_get_code
 					<td>passive</td>
 					<td>Boolean</td>
 					<td>Open connection in passive mode</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>dirmode</td>
+					<td>Boolean</td>
+					<td>Permissions of the uploaded files, can either be 'inherit'
+					or it can be a octal value without the leading zero.
+					Setting the dirmode to 'inherit' will cause the uploaded files
+					to have the same permissions as on the filesystem.</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>filemode</td>
+					<td>Boolean</td>
+					<td>This option does the same as dirmode, except it only affects
+					regular files.</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>depends</td>
+					<td>Boolean</td>
+					<td>If depends is set to true, the task will only update files
+					with a local modification timestamp that is newer than the
+					corresponding timestamp on the server.</td>
 					<td>false</td>
 					<td>No</td>
 				</tr>
@@ -2156,7 +2412,7 @@ Note that you can omit both startpoint and track attributes in this case
 				<tr>
 					<td>sign</td>
 					<td>Boolean</td>
-					<td>Make GPG-signed tag. See -a of <a
+					<td>Make GPG-signed tag. See -s of <a
 							href="http://www.kernel.org/pub/software/scm/git/docs/git-tag.html"
 							>git-tag</a>
 					</td>
@@ -2344,6 +2600,227 @@ Note that you can omit both startpoint and track attributes in this case
     repository="${repo.dir.resolved}" /&gt;
 </pre>
 		<h2>
+			<a name="GrowlNotifyTask"></a>GrowlNotifyTask </h2>
+		<p>When you have a long process and want to be notified when it is finished, without to stay 
+			focused on the console windows. Then use the GrowlNotify task.
+		</p>
+		<p>This task requires the PEAR <a href="http://pear.php.net/package/Net_Growl">Net_Growl</a> package installed (version  2.6.0).</p>
+		<h3>Features</h3>
+		<ul>
+			<li>Compatible Windows and Mac/OSX</li>
+			<li>Don't forget notification with sticky option</li>
+			<li>Define priority of messages</li>
+			<li>Send notification on private or public network.</li>
+		</ul>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>name</td>
+					<td>String</td>
+					<td>Name of application to be register</td>
+					<td>Growl for Phing</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>sticky</td>
+					<td>Boolean</td>
+					<td>Indicates if the notification should be sticky on desktop</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>message</td>
+					<td>String</td>
+					<td>Text of notification. Use \n to specify a line break</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>title</td>
+					<td>String</td>
+					<td>Title of notification</td>
+					<td>GrowlNotify</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>notification</td>
+					<td>String</td>
+					<td>The notification name/type</td>
+					<td>General Notification</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>appicon</td>
+					<td>String</td>
+					<td><p>The icon of the application being registered.</p>
+						<p>Must be a valid file type (png, jpg, gif, ico). Can be any of the following:</p>
+						<ul>
+							<li>absolute url (http://domain/image.png)</li>
+							<li>absolute file path (c:\temp\image.png)</li>
+							<li>relative file path (.\folder\image.png)</li>
+						</ul>
+					</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>host</td>
+					<td>String</td>
+					<td>The host address where to send the notification</td>
+					<td>127.0.0.1</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>The password required to send notifications over network</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>priority</td>
+					<td>String</td>
+					<td><p>The notification priority</p>
+						<p>Valid values are :</p>
+						<ul>
+							<li>low</li>
+							<li>moderate</li>
+							<li>normal</li>
+							<li>high</li>
+							<li>emergency</li>
+						</ul>
+					</td>
+					<td>normal</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>protocol</td>
+					<td>String</td>
+					<td><p>The protocol used to send the notification.</p>
+						<p>May be either gntp or udp.</p>
+					</td>
+					<td>gntp</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>icon</td>
+					<td>String</td>
+					<td><p>The icon to show for the notification.</p>
+						<p>Must be a valid file type (png, jpg, gif, ico). Can be any of the following:</p>
+						<ul>
+							<li>absolute url (http://domain/image.png)</li>
+							<li>absolute file path (c:\temp\image.png)</li>
+							<li>relative file path (.\folder\image.png)</li>
+						</ul>
+					</td>
+					<td>embeded growl icon v2</td>
+					<td>No</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Examples</h3>
+		<h4>Send a single notification on a remote host</h4>
+		<p>
+			Both sender and Growl client (Mac or Windows) should share the same password.
+		</p>
+		<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project name="phing-GrowlNotifyTask" basedir="." default="notification"&gt;
+
+    &lt;taskdef name="growlnotify" classname="phing.tasks.ext.GrowlNotifyTask" /&gt;
+
+    &lt;target name="notification"
+        description="display a single message with growl gntp over network"
+    &gt;
+        &lt;growlnotify message="Deployment of project LAMBDA is finished."
+            host="192.168.1.2"
+            password="seCretPa$$word"
+        /&gt;
+    &lt;/target&gt;
+
+&lt;/project&gt;
+</pre>
+		<h4>Send a single notification with UDP protocol</h4>
+		<p>
+			When you don't have a Macintosh, OS compatible with Growl GNTP, you 
+			should use the basic UDP protocol.
+		</p>
+		<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project name="phing-GrowlNotifyTask" basedir="." default="notification"&gt;
+
+    &lt;taskdef name="growlnotify" classname="phing.tasks.ext.GrowlNotifyTask" /&gt;
+
+    &lt;target name="notification"
+        description="display a single message with growl udp over network"
+    &gt;
+        &lt;growlnotify message="Notify my MAC that does not accept GNTP."
+            host="192.168.1.2"
+            password="seCretPa$$word"
+            protocol="udp"
+        /&gt;
+    &lt;/target&gt;
+
+&lt;/project&gt;
+</pre>
+		<h4>Send an important notification</h4>
+		<p>
+			If you want to send a notification that is so important that you don't want to missed it,
+			even if you are away from your computer. Use the sticky attribute.
+		</p>
+		<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project name="phing-GrowlNotifyTask" basedir="." default="notification"&gt;
+
+    &lt;taskdef name="growlnotify" classname="phing.tasks.ext.GrowlNotifyTask" /&gt;
+
+    &lt;target name="notification"
+        description="display a sticky message on desktop"
+    &gt;
+        &lt;growlnotify message="Project LAMDBA, unit tests FAILED."
+            priority="high"
+            sticky="true"
+        /&gt;
+    &lt;/target&gt;
+
+&lt;/project&gt;
+</pre>
+		<h4>Use your icons to identify an application</h4>
+		<p>
+			You may customize the Growl notification system, with different icons 
+			and more. 
+		</p>
+		<pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;project name="phing-GrowlNotifyTask" basedir="." default="notification"&gt;
+
+    &lt;taskdef name="growlnotify" classname="phing.tasks.ext.GrowlNotifyTask" /&gt;
+
+    &lt;target name="notification"
+        description="display a custom icon message"
+    &gt;
+        &lt;growlnotify message="Have a look on my beautiful message!"
+            name="phing Notifier"
+            title="phing notification"
+            priority="low"
+            sticky="false"
+            appicon="../images/my_icon.png"
+        /&gt;
+    &lt;/target&gt;
+
+&lt;/project&gt;
+</pre>
+		<h2>
 			<a name="HttpGetTask"></a>HttpGetTask </h2>
 		<p>This task will download a file through HTTP GET and save it to a specified directory. You
 			need an installed version of HTTP_Request2 to use this task.</p>
@@ -2378,6 +2855,22 @@ Note that you can omit both startpoint and track attributes in this case
 					<td>String</td>
 					<td>The filename for the downloaded file</td>
 					<td>The filename part of the URL</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>followRedirects</td>
+					<td>Boolean</td>
+					<td>Whether to follow HTTP
+					redirects</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>sslVerifyPeer</td>
+					<td>Boolean</td>
+					<td>Whether to verify SSL
+					certificates</td>
+					<td>true</td>
 					<td>No</td>
 				</tr>
 			</tbody>
@@ -2931,6 +3424,13 @@ Note that you can omit both startpoint and track attributes in this case
 					<td>No</td>
 				</tr>
 				<tr>
+					<td>haltonwarning</td>
+					<td>Boolean</td>
+					<td>Stop the build process if the linting process encounters a warning.</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>
+				<tr>
 					<td>showwarnings</td>
 					<td>Boolean</td>
 					<td>Sets the flag if warnings should be shown.</td>
@@ -3033,11 +3533,477 @@ Note that you can omit both startpoint and track attributes in this case
 		<ul>
 			<li>fileset <p>JavaScript files to be minified.</p></li>
 		</ul>
+
+		<h2><a name="LiquibaseChangeLogTask"></a>LiquibaseChangeLogTask </h2>
+		<p> The <em>LiquibaseChangeLogTask</em> writes the Change Log XML to copy the 
+		 current state of the database to the given changeLogFile.</p>
+		<h3>Example</h3>
+		<pre>
+&lt;liquibase-changelog
+  jar=&quot;/usr/local/lib/liquibase/liquibase.jar&quot;
+  classpathref=&quot;/usr/local/lib/liquibase/lib/mysql-connector-java-5.1.15-bin.jar&quot;
+  changelogFile=&quot;./changelogTest.xml&quot;
+  username=&quot;liquibase&quot;
+  password=&quot;liquibase&quot;
+  url=&quot;jdbc:mysql://localhost/mydatabase&quot;
+/&gt;
+</pre>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>jar</td>
+					<td>String</td>
+					<td>Location of the Liquibase jar file.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>classpathref</td>
+					<td>String</td>
+					<td>Additional classpath entries</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>changelogFile</td>
+					<td>String</td>
+					<td>Location of the changelog file in which the changes get written or read from.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>username</td>
+					<td>String</td>
+					<td>The username needed to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>The password needed for the given use to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>url</td>
+					<td>String</td>
+					<td>The JDBC Url representing the database datasource, e.g jdbc:mysql://localhost/mydatabase</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+			</tbody>
+		</table>
+ 		<h2><a name="LiquibaseDbDocTask"></a>LiquibaseDbDocTask </h2>
+		<p> The <em>LiquibaseDbDocTask</em> generates a Javadoc-like documentation based on current database and the given change log file.</p>
+		<h3>Example</h3>
+		<pre>
+&lt;liquibase-dbdoc
+  jar=&quot;/usr/local/lib/liquibase/liquibase.jar&quot;
+  classpathref=&quot;/usr/local/lib/liquibase/lib/mysql-connector-java-5.1.15-bin.jar&quot;
+  changelogFile=&quot;./changelogTest.xml&quot;
+  username=&quot;liquibase&quot;
+  password=&quot;liquibase&quot;
+  url=&quot;jdbc:mysql://localhost/mydatabase&quot;
+  outputDir=&quot;/tmp/generateddocs&quot;
+/&gt;
+</pre>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>jar</td>
+					<td>String</td>
+					<td>Location of the Liquibase jar file.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>classpathref</td>
+					<td>String</td>
+					<td>Additional classpath entries</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>changelogFile</td>
+					<td>String</td>
+					<td>Location of the changelog file in which the changes get written or read from.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>username</td>
+					<td>String</td>
+					<td>The username needed to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>The password needed for the given use to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>url</td>
+					<td>String</td>
+					<td>The JDBC Url representing the database datasource, e.g jdbc:mysql://localhost/mydatabase</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>outputDir</td>
+					<td>String</td>
+					<td>Absolute path where the documentation gets written to. If the given directory does not exist, it get`s created automatically.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2><a name="LiquibaseDiffTask"></a>LiquibaseDiffTask </h2>
+		<p> The <em>LiquibaseDiffTask</em> creates a diff between two databases. Will output the changes needed to convert the reference database to the state of the database.</p>
+		<h3>Example</h3>
+		<pre>
+&lt;liquibase-diff
+  jar=&quot;/usr/local/lib/liquibase/liquibase.jar&quot;
+  classpathref=&quot;/usr/local/lib/liquibase/lib/mysql-connector-java-5.1.15-bin.jar&quot;
+  changelogFile=&quot;./changelogTest.xml&quot;
+  username=&quot;liquibase&quot;
+  password=&quot;liquibase&quot;
+  url=&quot;jdbc:mysql://localhost/mydatabase&quot;
+  referenceUsername=&quot;liquibase&quot;
+  referencePassword=&quot;liquibase&quot;
+  referenceUrl=&quot;jdbc:mysql://localhost/refdatabase&quot;
+/&gt;
+</pre>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>jar</td>
+					<td>String</td>
+					<td>Location of the Liquibase jar file.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>classpathref</td>
+					<td>String</td>
+					<td>Additional classpath entries</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>changelogFile</td>
+					<td>String</td>
+					<td>Location of the changelog file in which the changes get written or read from.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>username</td>
+					<td>String</td>
+					<td>The username needed to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>The password needed for the given use to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>url</td>
+					<td>String</td>
+					<td>The JDBC Url representing the database datasource, e.g jdbc:mysql://localhost/mydatabase</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>referenceUsername</td>
+					<td>String</td>
+					<td>The username needed to connect to the reference database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>referencePassword</td>
+					<td>String</td>
+					<td>The password needed for the given use to connect to the reference database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>referenceUrl</td>
+					<td>String</td>
+					<td>The JDBC Url representing the reference database datasource, e.g jdbc:mysql://localhost/refdatabase.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2><a name="LiquibaseRollbackTask"></a>LiquibaseRollbackTask </h2>
+		<p> The <em>LiquibaseRollbackTask</em> rolls back the database to the the state is was when the tag was applied.</p>
+		<h3>Example</h3>
+		<pre>
+&lt;liquibase-rollback
+  jar=&quot;/usr/local/lib/liquibase/liquibase.jar&quot;
+  classpathref=&quot;/usr/local/lib/liquibase/lib/mysql-connector-java-5.1.15-bin.jar&quot;
+  changelogFile=&quot;./changelogTest.xml&quot;
+  username=&quot;liquibase&quot;
+  password=&quot;liquibase&quot;
+  url=&quot;jdbc:mysql://localhost/mydatabase&quot;
+  rollbackTag=&quot;tag_0_1&quot;
+/&gt;
+</pre>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>jar</td>
+					<td>String</td>
+					<td>Location of the Liquibase jar file.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>classpathref</td>
+					<td>String</td>
+					<td>Additional classpath entries</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>changelogFile</td>
+					<td>String</td>
+					<td>Location of the changelog file in which the changes get written or read from.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>username</td>
+					<td>String</td>
+					<td>The username needed to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>The password needed for the given use to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>url</td>
+					<td>String</td>
+					<td>The JDBC Url representing the database datasource, e.g jdbc:mysql://localhost/mydatabase</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>rollbackTag</td>
+					<td>String</td>
+					<td>The name of the tag to roll the database back to.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2><a name="LiquibaseTagTask"></a>LiquibaseTagTask </h2>
+		<p> The <em>LiquibaseTagTask</em> tags the current database state for future rollback.</p>
+		<h3>Example</h3>
+		<pre>
+&lt;liquibase-tag
+  jar=&quot;/usr/local/lib/liquibase/liquibase.jar&quot;
+  classpathref=&quot;/usr/local/lib/liquibase/lib/mysql-connector-java-5.1.15-bin.jar&quot;
+  changelogFile=&quot;./changelogTest.xml&quot;
+  username=&quot;liquibase&quot;
+  password=&quot;liquibase&quot;
+  url=&quot;jdbc:mysql://localhost/mydatabase&quot;
+  tag=&quot;tag_0_1&quot;
+/&gt;
+</pre>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>jar</td>
+					<td>String</td>
+					<td>Location of the Liquibase jar file.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>classpathref</td>
+					<td>String</td>
+					<td>Additional classpath entries</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>changelogFile</td>
+					<td>String</td>
+					<td>Location of the changelog file in which the changes get written or read from.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>username</td>
+					<td>String</td>
+					<td>The username needed to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>The password needed for the given use to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>url</td>
+					<td>String</td>
+					<td>The JDBC Url representing the database datasource, e.g jdbc:mysql://localhost/mydatabase</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>tag</td>
+					<td>String</td>
+					<td>The name of the tag to apply.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2><a name="LiquibaseUpdateTask"></a>LiquibaseUpdateTask </h2>
+		<p> The <em>LiquibaseUpdateTask</em> applies the latest changes from the changelog file to the definied database.</p>
+		<h3>Example</h3>
+		<pre>
+&lt;liquibase-update
+  jar=&quot;/usr/local/lib/liquibase/liquibase.jar&quot;
+  classpathref=&quot;/usr/local/lib/liquibase/lib/mysql-connector-java-5.1.15-bin.jar&quot;
+  changelogFile=&quot;./changelogTest.xml&quot;
+  username=&quot;liquibase&quot;
+  password=&quot;liquibase&quot;
+  url=&quot;jdbc:mysql://localhost/mydatabase&quot;
+/&gt;
+</pre>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>jar</td>
+					<td>String</td>
+					<td>Location of the Liquibase jar file.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>classpathref</td>
+					<td>String</td>
+					<td>Additional classpath entries</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>changelogFile</td>
+					<td>String</td>
+					<td>Location of the changelog file in which the changes get written or read from.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>username</td>
+					<td>String</td>
+					<td>The username needed to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>The password needed for the given use to connect to the database.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>url</td>
+					<td>String</td>
+					<td>The JDBC Url representing the database datasource, e.g jdbc:mysql://localhost/mydatabase</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+			</tbody>
+		</table>
 		<h2>
 			<a name="MailTask"></a>MailTask </h2>
 		<p>A task to send email.</p>
+		<p><b>NB:</b> this task requires the PEAR <a href="http://pear.php.net/package/Mail">Mail</a> and
+		<a href="http://pear.php.net/package/Mail_Mime">Mail_Mime</a> packages to send any attachments.</p>
 		<h3>Example</h3>
-		<pre>&lt;mail tolist=&quot;user@example.org&quot; subject=&quot;build complete&quot;"&gt;The build process is a success...&lt;/mail&gt;</pre>
+		<pre>&lt;mail tolist=&quot;user@example.org&quot; subject=&quot;build complete&quot;&gt;The build process is a success...&lt;/mail&gt;</pre>
 		<h3>Attributes</h3>
 		<table>
 			<thead>
@@ -3082,8 +4048,43 @@ Note that you can omit both startpoint and track attributes in this case
 		</table>
 		<h3>Supported Nested Tags</h3>
 		<ul>
-			<li>fileset <p>Files to be attached (not implemented at this time).</p></li>
+			<li>fileset <p>Files to be attached (requires the PEAR Mail and Mail_Mime packages).</p></li>
 		</ul>
+                <h2>
+                        <a name="ParallelTask"></a>ParallelTask </h2>
+                <p>Executes nested tasks in parallel.</p>
+                <p><b>WARNING:</b> this task is highly experimental, and
+                will only work on *nix machines that have the PHP pcntl
+                extension installed.</p>
+                <pre>&lt;parallel threadCount=&quot;4&quot;&gt;
+    &lt;echo&gt;Job 1&lt;/echo&gt;
+    &lt;echo&gt;Job 2&lt;/echo&gt;
+    &lt;echo&gt;Job 3&lt;/echo&gt;
+    &lt;echo&gt;Job 4&lt;/echo&gt;
+&lt;/trycatch&gt;
+</pre>
+                <h3>Attributes</h3>
+                <table>
+                        <thead>
+                                <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Default</th>
+                                        <th>Required</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                        <td>threadCount</td>
+                                        <td>Integer</td>
+                                        <td>Maximum number of threads /
+                                        processes to use.</td>
+                                        <td>n/a</td>
+                                        <td>No</td>
+                                </tr>
+                        </tbody>
+                </table>
 		<h2>
 			<a name="PatchTask"></a>PatchTask </h2>
 		<p> The <em>PatchTask</em> uses the <a href="http://savannah.gnu.org/projects/patch"
@@ -4269,9 +5270,9 @@ Note that you can omit both startpoint and track attributes in this case
 				<tr>
 					<td>allowedFileExtensions</td>
 					<td>String</td>
-					<td>The allowed file extensions (separated by space, comma or semicolon) when a
-						directory is specified in the <em>file</em> attribute.</td>
-					<td>php</td>
+					<td>The allowed file extensions / file types to process.
+						Separated by space, comma or semicolon.</td>
+					<td>php, inc, js, css</td>
 					<td>No</td>
 				</tr>
 				<tr>
@@ -4428,6 +5429,89 @@ Note that you can omit both startpoint and track attributes in this case
   &lt;formatter type=&quot;checkstyle&quot; outfile=&quot;/path/to/checkstyle.xml&quot;/&gt;
 &lt;/phpcodesniffer&gt;
 </pre>
+<h2><a name="PHPLocTask"></a>PHPLocTask</h2>
+<p> This task runs <a href="http://github.com/sebastianbergmann/phploc/" target="_blank">phploc</a>, a tool for measuring the size of PHP projects. You need an installed version of this tool (installable via PEAR) to use this task.</p>
+<h3>Attributes</h3>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Description</th>
+			<th>Default</th>
+			<th>Required</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>reportType</td>
+			<td>String</td>
+			<td>The type of the report. Available types are cli|csv|txt|xml.</td>
+			<td>cli</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>reportName</td>
+			<td>String</td>
+			<td>The name of the report type without a file extension.</td>
+			<td>phploc-report</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>reportDirectory</td>
+			<td>String</td>
+			<td>The directory to write the report file to.</td>
+			<td>false</td>
+			<td>Yes, when report type csv, txt or xml is defined.</td>
+		</tr>
+		<tr>
+			<td>countTests</td>
+			<td>Boolean</td>
+			<td>Flag to count the projects tests or not.</td>
+			<td>false</td>
+			<td>No</td>
+		</tr>
+		<tr>
+			<td>file</td>
+			<td>String</td>
+			<td>The name of the file to check.</td>
+			<td>n/a</td>
+			<td>Yes, when no nested fileset is defined.</td>
+		</tr>
+		<tr>
+			<td>suffixes</td>
+			<td>String</td>
+			<td>A comma-separated list of file suffixes to check.</td>
+			<td>php</td>
+			<td>No</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Supported Nested Tags</h3>
+<ul>
+	<li>fileset</li>
+</ul>
+<h3>Examples</h3>
+<pre>&lt;target name="-measure-and-log" description="Measures and logs the size of the project" hidden="true"&gt;
+  &lt;tstamp&gt;
+    &lt;format property="check.date.time" pattern="%Y%m%d-%H%M%S" locale="en_US"/&gt;
+  &lt;/tstamp&gt;
+  &lt;phploc reportType="txt" reportName="${check.date.time}-report"
+          reportDirectory="phploc-reports"&gt;
+    &lt;fileset dir="."&gt;
+      &lt;include name="**/*.php" /&gt;
+      &lt;include name="*.php" /&gt;
+    &lt;/fileset&gt;
+  &lt;/phploc&gt;
+&lt;/target&gt;</pre><p>Checks the size of the project living in ${project.basedir} and writes the result as a txt report to ${project.basedir}/phploc-reports/${check.date.time}-report.txt.</p>
+<pre>&lt;target name="project-size-and-tests" description="Measures the size of the project and count it's tests"&gt;
+  &lt;phploc countTests="true"&gt;
+    &lt;fileset dir="."&gt;
+      &lt;include name="**/*.php" /&gt;
+      &lt;include name="*.php" /&gt;
+    &lt;/fileset&gt;
+  &lt;/phploc&gt;
+&lt;/target&gt;</pre><p>Checks the size of the project living in ${project.basedir}, counts the project tests and writes/logs the result to the CLI.</p>
 		<h2>
 			<a name="PHPCPDTask"></a>PHPCPDTask </h2>
 		<p> This task runs <a href="http://github.com/sebastianbergmann/phpcpd/" target="_blank"
@@ -4450,7 +5534,8 @@ Note that you can omit both startpoint and track attributes in this case
 					<td>String</td>
 					<td>Path to source file or path</td>
 					<td>n/a</td>
-					<td>No</td>
+					<td>Only when there are no nested
+					<em>fileset</em> elements</td>
 				</tr>
 				<tr>
 					<td>minTokens</td>
@@ -4567,7 +5652,8 @@ Note that you can omit both startpoint and track attributes in this case
 					<td>String</td>
 					<td>Path to source file or path</td>
 					<td>n/a</td>
-					<td>No</td>
+					<td>Only when there are no nested
+					<em>fileset</em> elements</td>
 				</tr>
 				<tr>
 					<td>rulesets</td>
@@ -4697,7 +5783,8 @@ Note that you can omit both startpoint and track attributes in this case
 					<td>String</td>
 					<td>Path to source file or path</td>
 					<td>n/a</td>
-					<td>No</td>
+					<td>Only when there are no nested
+					<em>fileset</em> elements</td>
 				</tr>
 				<tr>
 					<td>configFile</td>
@@ -4846,6 +5933,8 @@ Note that you can omit both startpoint and track attributes in this case
 				<em>method</em>. </p>
 		<h2>
 			<a name="PhpDocumentorTask"></a>PhpDocumentorTask </h2>
+		<p><b>This task is now deprecated in favor of the <a
+			href="#PhpDocumentor2Task">PhpDocumentor2Task</a>.</b></p>
 		<p> This task runs <a href="http://www.phpdoc.org/" target="_blank">phpDocumentor</a>, an
 			auto-documentation tool for PHP similar to Javadoc. </p>
 		<h3>Attributes</h3>
@@ -5017,7 +6106,73 @@ Note that you can omit both startpoint and track attributes in this case
 &lt;/phpdoc&gt;
 </pre>
 		<h2>
+			<a name="PhpDocumentor2Task"></a>PhpDocumentor2Task</h2>
+		<p> This task runs <a href="http://www.phpdoc.org/"
+			target="_blank">phpDocumentor 2 </a>, PHP
+			5.3-compatible API documentation tool. This project
+			is the result of the merge of the phpDocumentor and
+			DocBlox projects. </p>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>title</td>
+					<td>String</td>
+					<td>Title of the project.</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>destdir</td>
+					<td>String</td>
+					<td>Destination directory for output files.</td>
+					<td>n/a</td>
+					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>template</td>
+					<td>String</td>
+					<td>Name of the documentation template to use.</td>
+					<td>responsive</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>quiet</td>
+					<td>Boolean</td>
+					<td>Suppress chatter / warning
+					messages.</td>
+					<td>true</td>
+					<td>No</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Supported Nested Tags</h3>
+		<ul>
+			<li>fileset - Files that should be included for parsing</li>
+		</ul>
+		<h3>Examples</h3>
+		<pre>
+&lt;phpdoc2 title=&quot;API Documentation&quot;
+  destdir=&quot;apidocs&quot;
+  template=&quot;responsive&quot;&gt;
+   &lt;fileset dir=&quot;./classes&quot;&gt;
+      &lt;include name=&quot;**/*.php&quot; /&gt;
+   &lt;/fileset&gt;
+&lt;/phpdoc2&gt;
+</pre>
+		<h2>
 			<a name="PhpDocumentorExternalTask"></a>PhpDocumentorExternalTask </h2>
+		<p><b>This task is now deprecated in favor of the <a
+			href="#PhpDocumentor2Task">PhpDocumentor2Task</a>.</b></p>
 		<p> This is the same as the <a href="#PhpDocumentorTask">PhpDocumentorTask</a> but uses the
 			command line application. Use this as a fallback in case you're running into troubles
 			when using the phpDocumentor-library with the PhpDocumentorTask directly, e.g. when
@@ -5146,7 +6301,7 @@ Note that you can omit both startpoint and track attributes in this case
 					<td>Control the level at which phplint reports status messages. One of
 							<em>error</em>, <em>warning</em>, <em>info</em>, <em>verbose</em>,
 							<em>debug</em>.</td>
-					<td><em>info</em></td>
+					<td><em>debug</em></td>
 					<td>No</td>
 				</tr>
 				<tr>
@@ -5293,6 +6448,17 @@ Note that you can omit both startpoint and track attributes in this case
 					<td>Boolean</td>
 					<td>Enable process isolation when executing tests.</td>
 					<td>false</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>configuration</td>
+					<td>String</td>
+					<td>Path to a PHPUnit configuration file (such as
+					<em>phpunit.xml</em>). Supported
+					elements are: <em>bootstrap</em>, <em>processIsolation</em>, <em>stopOnFailure</em>,
+					<em>stopOnError</em>, <em>stopOnIncomplete</em> and <em>stopOnSkipped</em>.
+					Values provided <b>overwrite</b> other attributes!</td>
+					<td>n/a</td>
 					<td>No</td>
 				</tr>
 			</tbody>
@@ -5615,6 +6781,13 @@ Note that you can omit both startpoint and track attributes in this case
 					<td>n/a</td>
 					<td>No</td>
 				</tr>
+				<tr>
+					<td>mode</td>
+					<td>Integer</td>
+					<td>The mode to create directories with.</td>
+					<td>From umask</td>
+					<td>No</td>
+				</tr>
 			</tbody>
 		</table>
 		<h3>Supported Nested Tags</h3>
@@ -5838,6 +7011,23 @@ Note that you can omit both startpoint and track attributes in this case
 					<td>n/a</td>
 					<td>Yes (unless fileset)</td>
 				</tr>
+				<tr>
+					<td>contentType</td>
+					<td>String</td>
+					<td>Content type of the object, set
+					to <em>auto</em> if you if you want
+					to autodetect the content type based
+					on the source file extension</td>
+					<td>binary/octet-stream</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>fileNameOnly</td>
+					<td>Boolean</td>
+					<td>Whether filenames should contain paths when uploaded to an S3 bucket</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>  				
 			</tbody>
 		</table>
 		<h3>Supported Nested Tags</h3>
@@ -5978,14 +7168,14 @@ host=&quot;webserver&quot; todir=&quot;/www/htdocs/project/&quot;&gt;
 				<tr>
 					<td>pubkeyfile</td>
 					<td>String</td>
-					<td>Public key file to use for the connection</td>
+					<td>Public key file (OpenSSH format) to use for the connection</td>
 					<td>none</td>
 					<td>No</td>
 				</tr>
 				<tr>
 					<td>privkeyfile</td>
 					<td>String</td>
-					<td>Private key file to use for the connection</td>
+					<td>Private key file (OpenSSH format) to use for the connection</td>
 					<td>none</td>
 					<td>No</td>
 				</tr>
@@ -6038,10 +7228,69 @@ host=&quot;webserver&quot; todir=&quot;/www/htdocs/project/&quot;&gt;
 		<h3>Supported Nested Tags</h3>
 		<ul>
 			<li>fileset</li>
+            <li>sshconfig <p>Sometimes it is necessary to set specific configuration parameters on the ssh connection
+                when connecting to a remote server.  You can set them with the sshconfig nested tag.  Set the parameters
+                to specify connection and encryption options.  These are the parameters as specified by the $methods
+                parameter of the ssh2_connect function.  See <a href="http://us3.php.net/ssh2_connect" target="_blank">ssh2_connect</a>
+                for more information</p>
+                <p>sshconfig can also be used as project level parameter with a refid so the same parameters can be re-used
+                    across a project easily.</p>
+                <h3>Examples</h3>
+		        <pre>&lt;scp username=&quot;john&quot; password=&quot;smith&quot;
+host=&quot;webserver&quot; fetch=&quot;true&quot;
+todir=&quot;/home/john/backup&quot;
+file=&quot;/www/htdocs/test.html&quot; &gt;
+    &lt;sshconfig  kex=&quot;diffie-hellman-group1-sha1&quot; hostkey=&quot;ssh-rsa&quot;&gt;
+        &lt;client crypt=&quot;3des-cbc&quot; /&gt;
+        &lt;server crypt=&quot;aes256-cbc,aes192-cbc,aes128-cbc&quot; /&gt;
+    &lt;/sshconfig&gt;
+&lt;/scp&gt;</pre>
+                <h3>Attributes</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                        <th>Required</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>kex</td>
+                        <td>String</td>
+                        <td>List of key exchange methods to advertise, comma separated in order of preference.</td>
+                        <td>n/a</td>
+                        <td >No</td>
+                    </tr>
+                    <tr>
+                        <td>hostkey</td>
+                        <td>String</td>
+                        <td>List of hostkey methods to advertise, come separated in order of preference.</td>
+                        <td>n/a</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>client</td>
+                        <td>Nested Tag</td>
+                        <td>Element containing attributes crypt, comp, and mac method preferences for messages sent from client to server.  All attributes are optional.</td>
+                        <td>n/a</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>server</td>
+                        <td>Nested Tag</td>
+                        <td>Element containing attributes crypt, comp, and mac method preferences for messages sent from server to client.  All attributes are optional.</td>
+                        <td>n/a</td>
+                        <td>No</td>
+                    </tr>
+                    </tbody>
+                </table></li>
 		</ul>
 		<h2>
 			<a name="SshTask"></a>SshTask </h2>
-		<p> The <em>ScpTask</em> executes commands on a remote host using ssh.. This task requires
+		<p> The <em>SshTask</em> executes commands on a remote host using ssh. This task requires
 			the <a href="http://pecl.php.net/package/ssh2" target="_blank">PHP SSH2 extension</a> to
 			function. </p>
 		<h3>Examples</h3>
@@ -6091,14 +7340,14 @@ host=&quot;webserver&quot; command=&quot;ls&quot; /&gt;</pre>
 				<tr>
 					<td>pubkeyfile</td>
 					<td>String</td>
-					<td>Public key file to use for the connection</td>
+					<td>Public key file (OpenSSH format) to use for the connection</td>
 					<td>none</td>
 					<td>No</td>
 				</tr>
 				<tr>
 					<td>privkeyfile</td>
 					<td>String</td>
-					<td>Private key file to use for the connection</td>
+					<td>Private key file (OpenSSH format) to use for the connection</td>
 					<td>none</td>
 					<td>No</td>
 				</tr>
@@ -6132,6 +7381,71 @@ host=&quot;webserver&quot; command=&quot;ls&quot; /&gt;</pre>
 				</tr>
 			</tbody>
 		</table>
+        <h3>Supported Nested Tags</h3>
+        <ul>
+            <li>sshconfig <p>Sometimes it is necessary to set specific configuration parameters on the ssh connection
+                when connecting to a remote server.  You can set them with the sshconfig nested tag.  Set the parameters
+                to specify connection and encryption options.  These are the parameters as specified by the $methods
+                parameter of the ssh2_connect function.  See <a href="http://us3.php.net/ssh2_connect" target="_blank">ssh2_connect</a>
+                for more information</p>
+                <p>sshconfig can also be used as project level parameter with a refid so the same parameters can be re-used
+                across a project easily.</p>
+                <h3>Examples</h3>
+		        <pre>&lt;project name=&quot;Test&quot; default=&quot;test&quot;&gt;
+
+    &lt;sshconfig id=&quot;ssh_config&quot; kex=&quot;diffie-hellman-group1-sha1&quot; hostkey=&quot;ssh-rsa&quot;&gt;
+        &lt;client crypt=&quot;3des-cbc&quot; /&gt;
+        &lt;server crypt=&quot;aes256-cbc,aes192-cbc,aes128-cbc&quot; /&gt;
+    &lt;/sshconfig&gt;
+
+    &lt;target name=&quot;test&quot;&gt;
+        &lt;ssh port=&quot;22&quot; host=&quot;33.33.33.10&quot; command=&quot;echo 'Success!'&quot; username=&quot;user&quot; password=&quot;password&quot;&gt;
+            &lt;sshconfig refid=&quot;ssh_connect_methods&quot; /&gt;
+        &lt;/ssh&gt;
+    &lt;/target&gt;</pre>
+                <h3>Attributes</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                        <th>Required</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>kex</td>
+                        <td>String</td>
+                        <td>List of key exchange methods to advertise, comma separated in order of preference.</td>
+                        <td>n/a</td>
+                        <td >No</td>
+                    </tr>
+                    <tr>
+                        <td>hostkey</td>
+                        <td>String</td>
+                        <td>List of hostkey methods to advertise, come separated in order of preference.</td>
+                        <td>n/a</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>client</td>
+                        <td>Nested Tag</td>
+                        <td>Element containing attributes crypt, comp, and mac method preferences for messages sent from client to server.  All attributes are optional.</td>
+                        <td>n/a</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>server</td>
+                        <td>Nested Tag</td>
+                        <td>Element containing attributes crypt, comp, and mac method preferences for messages sent from server to client.  All attributes are optional.</td>
+                        <td>n/a</td>
+                        <td>No</td>
+                    </tr>
+                    </tbody>
+                </table></li>
+        </ul>
 		<h2>
 			<a name="SimpleTestTask"></a>SimpleTestTask </h2>
 		<p> This task runs testcases using the <a href="http://www.simpletest.org/" target="_blank"
@@ -6486,7 +7800,6 @@ host=&quot;webserver&quot; command=&quot;ls&quot; /&gt;</pre>
    svnpath=&quot;/usr/bin/svn&quot;
    username="anony"
    password="anony"
-   force="true"
    nocache="true"
    repositoryurl=&quot;svn://localhost/project/trunk/&quot;
    todir=&quot;svn://localhost/project/tags/0.1&quot;/&gt;
@@ -6539,13 +7852,6 @@ host=&quot;webserver&quot; command=&quot;ls&quot; /&gt;</pre>
 					<td>No</td>
 				</tr>
 				<tr>
-					<td>force</td>
-					<td>Boolean</td>
-					<td>Force overwrite files if they already exist</td>
-					<td>False</td>
-					<td>No</td>
-				</tr>
-				<tr>
 					<td>nocache</td>
 					<td>Boolean</td>
 					<td>Connection credentials will not be cached</td>
@@ -6555,7 +7861,7 @@ host=&quot;webserver&quot; command=&quot;ls&quot; /&gt;</pre>
 				<tr>
 					<td>todir</td>
 					<td>String</td>
-					<td>Path to export to</td>
+					<td>Path to copy to</td>
 					<td>none</td>
 					<td>Yes</td>
 				</tr>
@@ -6742,6 +8048,20 @@ host=&quot;webserver&quot; command=&quot;ls&quot; /&gt;</pre>
 					<td>Yes, or <em>workingcopy</em></td>
 				</tr>
 				<tr>
+					<td>username</td>
+					<td>String</td>
+					<td>A username used to connect to the SVN server</td>
+					<td>none</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>A password used to connect to the SVN server</td>
+					<td>none</td>
+					<td>No</td>
+				</tr>
+				<tr>
 					<td>propertyname</td>
 					<td>String</td>
 					<td>Name of property to use</td>
@@ -6819,6 +8139,20 @@ host=&quot;webserver&quot; command=&quot;ls&quot; /&gt;</pre>
 					<td>Yes, or <em>workingcopy</em></td>
 				</tr>
 				<tr>
+					<td>username</td>
+					<td>String</td>
+					<td>A username used to connect to the SVN server</td>
+					<td>none</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>A password used to connect to the SVN server</td>
+					<td>none</td>
+					<td>No</td>
+				</tr>
+				<tr>
 					<td>propertyname</td>
 					<td>String</td>
 					<td>Name of property to use</td>
@@ -6836,7 +8170,7 @@ host=&quot;webserver&quot; command=&quot;ls&quot; /&gt;</pre>
 				<tr>
 					<td>forceCompatible</td>
 					<td>Boolean</td>
-					<td>Sets whether to force compatibility with older SVN versions (&lt; 1.2)</td>
+					<td><b>Deprecated:</b> Sets whether to force compatibility with older SVN versions (&lt; 1.2)</td>
 					<td>false</td>
 					<td>No</td>
 				</tr>
@@ -6845,11 +8179,8 @@ host=&quot;webserver&quot; command=&quot;ls&quot; /&gt;</pre>
 		<h2>
 			<a name="SvnListTask"></a> SvnListTask </h2>
 		<p> The <em>SvnListTask</em> stores the output of a svn list command on a workingcopy or
-			repositoryurl in a property. </p>
-		<p> Currently it always uses the <em>forceCompatiple</em> mode so the supplied attribute is
-			ignored. It uses svn's --verbose switch to get additional data about the listed items.
-			The result will be stored in an array, one string that is seperated by ' | ' (in words:
-			space pipe space) for easy parsing. </p>
+			repositoryurl in a property. The result will be stored in an array, one string
+			that is separated by ' | ' (in words: space pipe space) for easy parsing. </p>
 		<h3>Examples</h3>
 		<pre>&lt;svnlist svnpath="/usr/bin/svn" workingcopy="/home/user/svnwc" propertyname="svn.list"/&gt; </pre>
 		<pre>&lt;svnlist svnpath="/usr/bin/svn" repositoryurl="http://svn.example.com/myrepo/tags" orderDescending="true" limit="10" /&gt; </pre>
@@ -6896,6 +8227,20 @@ revision | author | date         | item
 					<td>none</td>
 				</tr>
 				<tr>
+					<td>username</td>
+					<td>String</td>
+					<td>A username used to connect to the SVN server</td>
+					<td>none</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>A password used to connect to the SVN server</td>
+					<td>none</td>
+					<td>No</td>
+				</tr>
+				<tr>
 					<td>propertyname</td>
 					<td>String</td>
 					<td>Name of property to use</td>
@@ -6905,7 +8250,7 @@ revision | author | date         | item
 				<tr>
 					<td>forceCompatible</td>
 					<td>Boolean</td>
-					<td>Sets whether to force compatibility with older SVN versions (&lt; 1.2)</td>
+					<td><b>Deprecated:</b> Sets whether to force compatibility with older SVN versions (&lt; 1.2)</td>
 					<td>true</td>
 					<td>No</td>
 				</tr>
@@ -6928,10 +8273,8 @@ revision | author | date         | item
 		<h2>
 			<a name="SvnLogTask"></a> SvnLogTask </h2>
 		<p> The <em>SvnLogTask</em> stores the output of a svn log command on a workingcopy or
-			repositoryurl in a property. </p>
-		<p> Currently it always uses the <em>forceCompatiple</em> mode so the supplied attribute is
-			ignored. The result will be stored in an array, one string that is seperated by ' | '
-			(in words: space pipe space) for easy parsing. </p>
+			repositoryurl in a property. The result will be stored in an array, one string
+			that is separated by ' | ' (in words: space pipe space) for easy parsing. </p>
 		<h3>Examples</h3>
 		<pre>&lt;svnlog svnpath="/usr/bin/svn" workingcopy="/home/user/svnwc" propertyname="svn.log"/&gt; </pre>
 		<pre>&lt;svnlog svnpath="/usr/bin/svn" repositoryurl="http://svn.example.com/myrepo/trunk" limit="10" /&gt; </pre>
@@ -6975,6 +8318,20 @@ revision | author | date         | item
 					<td>none</td>
 				</tr>
 				<tr>
+					<td>username</td>
+					<td>String</td>
+					<td>A username used to connect to the SVN server</td>
+					<td>none</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>password</td>
+					<td>String</td>
+					<td>A password used to connect to the SVN server</td>
+					<td>none</td>
+					<td>No</td>
+				</tr>
+				<tr>
 					<td>propertyname</td>
 					<td>String</td>
 					<td>Name of property to use</td>
@@ -6984,7 +8341,7 @@ revision | author | date         | item
 				<tr>
 					<td>forceCompatible</td>
 					<td>Boolean</td>
-					<td>Sets whether to force compatibility with older SVN versions (&lt; 1.2)</td>
+					<td><b>Deprecated:</b> Sets whether to force compatibility with older SVN versions (&lt; 1.2)</td>
 					<td>true</td>
 					<td>No</td>
 				</tr>
@@ -7176,6 +8533,93 @@ revision | author | date         | item
 				</tr>
 			</tbody>
 		</table>
+        <h2>
+            <a name="SymfonyConsoleTask"></a>SymfonyConsoleTask
+        </h2>
+        <p>Executes Symfony2 console commands</p>
+        <h3>Examples</h3>
+        <p>Simple example</p>
+        <pre>
+            &lt;SymfonyConsole command=&quot;cache:clear&quot;/&gt;
+        </pre>
+        <p>Complex example</p>
+        <pre>
+            &lt;SymfonyConsole command=&quot;cache:warmup&quot;&gt;
+                &lt;arg name=&quot;env&quot; value=&quot;prod&quot; /&gt;
+                &lt;arg name=&quot;no-debug&quot; /&gt;
+                &lt;arg value=&quot;some/path/or/single/value&quot; quotes=&quot;true&quot;/&gt;
+            &lt;/SymfonyConsole&gt;
+        </pre>
+        <h3>Attributes</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Default</th>
+                    <th>Required</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>command</td>
+                    <td>string</td>
+                    <td>The Symfony Console command to execute</td>
+                    <td>n/a</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td>console</td>
+                    <td>string</td>
+                    <td>The path to symfony console application</td>
+                    <td>app/console</td>
+                    <td>no</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <h3>Supported Nested Tags</h3>
+        <ul>
+            <li>Arg
+            <h3>Attributes</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Default</th>
+                    <th>Required</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>name</td>
+                    <td>string</td>
+                    <td>the name for this argument, -- will be appended</td>
+                    <td>n/a</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>value</td>
+                    <td>string</td>
+                    <td>the value for the argument</td>
+                    <td>n/a</td>
+                    <td>no</td>
+                </tr>
+                <tr>
+                    <td>quotes</td>
+                    <td>string</td>
+                    <td>set to true if the value should be enclosed in double quotes</td>
+                    <td>false</td>
+                    <td>no</td>
+                </tr>
+            </tbody>
+            
+        </table>
+            </li>
+        </ul>
 		<h2>
 			<a name="SymlinkTask"></a>SymlinkTask </h2>
 		<p>Creates symlink(s) to a specified file / directory or a collection of files /
@@ -7245,16 +8689,17 @@ revision | author | date         | item
 			<a name="TarTask"></a>TarTask </h2>
 		<p> The <em>TarTask</em> creates a tarball from a fileset or directory. </p>
 		<h3>Examples</h3>
-		<pre>&lt;tar destfile=&quot;phing.tar&quot; compression=&quot;gzip&quot;&gt;
+		<pre>&lt;tar destfile=&quot;phing.tar&quot;&gt;
  &lt;fileset dir=&quot;.&quot;&gt;
 	 &lt;include name=&quot;**/**&quot; /&gt;
  &lt;/fileset&gt;
 &lt;/tar&gt;
 </pre>
 		<p>The above example uses a fileset to determine which files to include in the archive.</p>
-		<pre>&lt;tar destfile=&quot;phing.tar&quot; basedir=&quot;.&quot; compression=&quot;gzip&quot;/&gt;</pre>
+		<pre>&lt;tar destfile=&quot;phing.tar.gz&quot; basedir=&quot;.&quot; compression=&quot;gzip&quot;/&gt;</pre>
 		<p>The second example uses the basedir attribute to include the contents of that directory
-			(including subdirectories) in the archive.</p>
+			(including subdirectories) in the archive,
+			compressing the archive using gzip.</p>
 		<h3>Attributes</h3>
 		<table>
 			<thead>
@@ -7613,6 +9058,13 @@ revision | author | date         | item
 					<td>,</td>
 					<td>No</td>
 				</tr>
+				<tr>
+					<td>required</td>
+					<td>Boolean</td>
+					<td>Whether the XML file is required.</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>
 			</tbody>
 		</table>
 		<h3>Example</h3>
@@ -7684,7 +9136,7 @@ a2.a3.a4=false</pre>
 				<tr>
 					<td>disable</td>
 					<td>String</td>
-					<td>Disable warnings seperated by comma</td>
+					<td>Disable warnings separated by comma</td>
 					<td>n/a</td>
 					<td>No</td>
 				</tr>

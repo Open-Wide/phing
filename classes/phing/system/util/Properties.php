@@ -30,7 +30,7 @@ include_once 'phing/system/io/FileWriter.php';
  *        - Add support for arrays (separated by ',')
  *
  * @package    phing.system.util
- * @version $Revision$
+ * @version $Id$
  */
 class Properties {
 
@@ -91,13 +91,22 @@ class Properties {
         if (($lines = @file($filePath)) === false) {
             throw new IOException("Unable to parse contents of $filePath");
         }
-        
+
+        // concatenate lines ending with backslash
+        $linesCount = count($lines);
+        for($i = 0; $i < $linesCount; $i++) {
+            if (substr($lines[$i], -2, 1) === '\\') {
+                $lines[$i + 1] = substr($lines[$i], 0, -2) . ltrim($lines[$i + 1]);
+                $lines[$i] = '';
+            }
+        }
+
         $this->properties = array();
         $sec_name = "";
         
         foreach($lines as $line) {
             // strip comments and leading/trailing spaces
-            $line = trim(preg_replace("/[;#]\s.+$/", "", $line));
+            $line = trim(preg_replace("/\s+[;#]\s.+$/", "", $line));
             
             if (empty($line) || $line[0] == ';' || $line[0] == '#') {
                 continue;

@@ -142,7 +142,7 @@
 		</ul>
 		<h2>
 			<a name="AvailableTask"></a>AvailableTask </h2>
-		<p>Available Task tests if a resource/file is set and sets a certain property to a certain
+		<p>Available Task tests if a resource/file/extension is set and sets a certain property to a certain
 			value if it exists.</p>
 		<pre title="Example of how to use AvailableTask">
 &lt;available file=&quot;/tmp/test.txt&quot; property=&quot;test_txt_exists&quot; value=&quot;Yes&quot;/&gt;
@@ -150,6 +150,8 @@
 &lt;available file=&quot;/home/foo&quot; type=&quot;dir&quot; property=&quot;properties.yetanother&quot; /&gt;
 
 &lt;available file=&quot;/home/foo/bar&quot; property=&quot;foo.bar&quot; value=&quot;Well, yes&quot; /&gt;
+
+&lt;available extension=&quot;foo&quot; property=&quot;foo.ext.loaded&quot; /&gt;
 </pre>
 		<p> Here, <em>AvailableTask</em> first checks for the existance of either file or directory
 			named <em>test.txt</em> in <em>/tmp</em>. Then, it checks for the directory <em>foo</em>
@@ -158,7 +160,9 @@
 				<em>&quot;Yes&quot;</em>, if <em>/home/foo</em> is found and a directory,
 				<em>properties.yetanother</em> is set to <em>&quot;true&quot;</em> (default). If
 				<em>/home/foo/bar</em> exists, <em>AvailableTask</em> will set <em>foo.bar</em> to
-				<em>&quot;Well, yes&quot;</em>. </p>
+				<em>&quot;Well, yes&quot;</em>. And last it checks if extension <em>foo</em> is loaded,
+				so the property <em>foo.ext.loaded</em> is set to <em>&quot;true&quot;</em> (default).
+		</p>
 		<p><b>NB:</b> the Available task can also be used as a <a
 				href="../ProjectComponents.html#Conditions">condition</a>.</p>
 		<h3>Parameters</h3>
@@ -192,14 +196,21 @@
 					<td>String</td>
 					<td>File/directory to check existence.</td>
 					<td>n/a</td>
-					<td>Yes (or <em>resource</em>)</td>
+					<td>Yes (or <em>resource</em> or <em>extension</em>)</td>
 				</tr>
 				<tr>
 					<td>resource</td>
 					<td>String</td>
 					<td>Path of the resource to look for.</td>
 					<td>n/a</td>
-					<td>Yes (or <em>file</em>)</td>
+					<td>Yes (or <em>file</em> or <em>extension</em>)</td>
+				</tr>
+				<tr>
+					<td>extension</td>
+					<td>String</td>
+					<td>Name of the extension to look for.</td>
+					<td>n/a</td>
+					<td>Yes (or <em>file</em> or <em>resource</em>)</td>
 				</tr>
 				<tr>
 					<td>type</td>
@@ -499,7 +510,8 @@
 				<tr>
 					<td>overwrite</td>
 					<td>Boolean</td>
-					<td>If set to true, the target file will be overwritten.</td>
+					<td>Overwrite existing files even if
+					the destination files are newer.</td>
 					<td>false</td>
 					<td>No</td>
 				</tr>
@@ -508,6 +520,15 @@
 					<td>Boolean</td>
 					<td>If set to <em>true</em>, the new file will have the same mtime as the old
 						one.</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>preservemode<br />or<br />preservepermissions</td>
+					<td>Boolean</td>
+					<td>If set to <em>true</em>, the new file (and directory) will have the same
+					permissions as the old one. The <em>mode</em> specified for directory
+					creation will be ignored.</td>
 					<td>false</td>
 					<td>No</td>
 				</tr>
@@ -522,7 +543,7 @@
 					<td>mode</td>
 					<td>Integer</td>
 					<td>Mode (octal) to create directories with.</td>
-					<td>0755</td>
+					<td>From umask</td>
 					<td>No</td>
 				</tr>
 				<tr>
@@ -639,7 +660,7 @@
 					<td>No</td>
 				</tr>
 				<tr>
-					<td>setfailonerror</td>
+					<td>failonerror</td>
 					<td>Boolean</td>
 					<td>Stop the build process if the command returns any errors</td>
 					<td>false</td>
@@ -804,7 +825,7 @@
 					<td>Boolean</td>
 					<td>If this attribute is set to <em>true</em>, DeleteTask will verbose on errors
 						but the build process will not be stopped.</td>
-					<td>true</td>
+					<td>false</td>
 					<td>No</td>
 				</tr>
 				<tr>
@@ -1037,7 +1058,9 @@
 						<tr>
 							<td>value</td>
 							<td>String</td>
-							<td>A single command-line argument; can contain space characters.</td>
+							<td>A single command-line argument; can contain space characters.
+							To pass an empty argument, enclose two double quotes in single quotes
+							('""').</td>
 							<td>n/a</td>
 							<td rowspan="4">One of these</td>
 						</tr>
@@ -1067,18 +1090,18 @@
 			</li>
 		</ul>
 		<h2>
-			<a name="ExitTask"></a>ExitTask </h2>
-		<p>Causes the current build script execution to fail and the script to exit with an
+			<a name="FailTask"></a>FailTask </h2>
+		<p>Causes the current build script execution to fail (throwing a BuildException) and the script to exit with an
 			(optional) error message.</p>
 		<h3>Example</h3>
-		<pre>&lt;-- Exit w/ message --&gt;
-&lt;exit message=&quot;Failed for some reason!&quot; /&gt;
+		<pre>&lt;-- Exit with message --&gt;
+&lt;fail message=&quot;Failed for some reason!&quot; /&gt;
 
 &lt;--  Exit if ${errorprop} is defined --&gt;
-&lt;exit if=&quot;errorprop&quot; message=&quot;Detected error!&quot; /&gt;
+&lt;fail if=&quot;errorprop&quot; message=&quot;Detected error!&quot; /&gt;
 
 &lt;-- Exit unless ${dontfail} prop is defined. --&gt;
-&lt;exit unless=&quot;dontfail&quot; message=&quot;Detected error!&quot; /&gt;
+&lt;fail unless=&quot;dontfail&quot; message=&quot;Detected error!&quot; /&gt;
 
 </pre>
 		<h3>Attributes</h3>
@@ -1097,14 +1120,14 @@
 					<td>message</td>
 					<td>String</td>
 					<td>The message to display (reason for script abort).</td>
-					<td>&quot;No Message&quot;</td>
+					<td>n/a</td>
 					<td>No</td>
 				</tr>
 				<tr>
 					<td>msg</td>
 					<td>String</td>
 					<td>Alias for message</td>
-					<td>&quot;No Message&quot;</td>
+					<td>n/a</td>
 					<td>No</td>
 				</tr>
 				<tr>
@@ -1280,11 +1303,12 @@
 		<p> So if I import for example a <em>docs/build.xml</em> file named
 				<strong>builddocs</strong>, I can get its path as
 				<strong>phing.file.builddocs</strong>, similarly to the <strong>phing.file</strong>
-			property of the main buildfile. </p>
+			property of the main buildfile. Additionally, the directory will be stored in 
+			<strong>phing.dir.builddocs</strong>.</p>
 		<p>Note that "builddocs" is not the filename, but the name attribute present in the imported
 			project tag.</p>
-		<p>If import file does not have a name attribute, the phing.file.projectname property will
-			not be set.</p>
+		<p>If import file does not have a name attribute, the <strong>phing.file.projectname</strong>
+		    and <strong>phing.dir.projectname</strong> properties will not be set.</p>
 		<h3>Resolving Files Against the Imported File</h3>
 		<p> Suppose your main build file called <code>importing.xml</code> imports a build file
 				<code>imported.xml</code> , located anywhere on the file system, and
@@ -1307,15 +1331,12 @@
 		<pre>
 &lt;!-- imported.xml --&gt;
 &lt;project name=&quot;imported&quot; basedir=&quot;.&quot; default=&quot;...&quot;&gt;
-  &lt;php function=&quot;dirname&quot; returnProperty=&quot;imported.basedir&quot;&gt;
-    &lt;param value=&quot;${phing.file.imported}&quot;/&gt;
-  &lt;/php&gt;
-  &lt;property file=&quot;${imported.basedir}/imported.properties&quot;/&gt;
+  &lt;property file=&quot;${phing.dir.imported}/imported.properties&quot;/&gt;
 &lt;/project&gt;
 </pre>
-		<p> As explained above <code>${phing.file.imported}</code> stores the path of the build
+		<p> As explained above <code>${phing.file.imported}</code> stores the full path of the build
 			script, that defines the project called <strong>imported</strong>, (in short it stores
-			the path to <em>imported.xml</em>) and &lt;php function="dirname"&gt; takes its
+			the path to <em>imported.xml</em>) and <code>${phing.dir.imported}</code> stores its
 			directory. This technique also allows <em>imported.xml</em> to be used as a standalone
 			file (without being imported in other project). </p>
 		<h3>Example</h3>
@@ -1541,7 +1562,7 @@
 					<td>mode</td>
 					<td>Integer</td>
 					<td>The mode to create the directory with.</td>
-					<td>0755</td>
+					<td>From umask</td>
 					<td>No</td>
 				</tr>
 			</tbody>
@@ -1833,7 +1854,17 @@
 &lt;property name=&quot;foo.bar&quot; value=&quot;Yet another property...&quot; /&gt;
 &lt;echo message=&quot;${foo.bar}&quot; /&gt;
 
-&lt;property file=&quot;build.properties&quot;  /&gt;
+&lt;property file=&quot;build.properties&quot; /&gt;
+
+&lt;property environment=&quot;env&quot; /&gt;
+
+&lt;property name=&quot;newproperty&quot; value=&quot;Hello&quot;&gt;
+  &lt;filterchain&gt;
+    &lt;replaceregexp&gt;
+      &lt;regexp pattern=&quot;Hello&quot; replace=&quot;World&quot; ignoreCase=&quot;true&quot;/&gt;
+    &lt;/replaceregexp&gt;
+  &lt;filterchain&gt;
+&lt;/property&gt;
 </pre>
 		<h3>Attributes</h3>
 		<table>
@@ -1852,21 +1883,16 @@
 					<td>String</td>
 					<td>The name of the Property.</td>
 					<td>n/a</td>
-					<td>Yes (unless using file)</td>
+					<td>Yes (unless using <em>file</em>
+					or <em>environment</em>)</td>
 				</tr>
 				<tr>
 					<td>value</td>
 					<td>String</td>
 					<td>The value of the Property.</td>
 					<td>n/a</td>
-					<td>Yes (unless using file)</td>
-				</tr>
-				<tr>
-					<td>override</td>
-					<td>Boolean</td>
-					<td>Whether to force override of existing value.</td>
-					<td>false</td>
-					<td>No</td>
+					<td>Yes (unless using <em>file</em>
+					or <em>environment</em>)</td>
 				</tr>
 				<tr>
 					<td>file</td>
@@ -1876,20 +1902,27 @@
 					<td>No</td>
 				</tr>
 				<tr>
-					<td>prefix</td>
+					<td>environment</td>
 					<td>String</td>
-					<td>Used when properites are loaded from file. Prefix is applied to properties
-						loaded from specified file. A "." is appended to the prefix if not
-						specified.</td>
+					<td>Loads properties from environment with the specified value
+						as prefix. Thus if you specify environment="myenv" you will be able to access OS-specific
+						environment variables via property names "myenv.PATH" or "myenv.TERM".</td>
 					<td>n/a</td>
 					<td>No</td>
 				</tr>
 				<tr>
-					<td>environment</td>
+					<td>override</td>
+					<td>Boolean</td>
+					<td>Whether to force override of existing value.</td>
+					<td>false</td>
+					<td>No</td>
+				</tr>
+				<tr>
+					<td>prefix</td>
 					<td>String</td>
-					<td>The prefix to use when retrieving environment variables. * Thus if you
-						specify environment="myenv" you will be able to access OS-specific *
-						environment variables via property names "myenv.PATH" or "myenv.TERM".</td>
+					<td>Used when properties are loaded from file. Prefix is applied to properties
+						loaded from specified file. A "." is appended to the prefix if not
+						specified.</td>
 					<td>n/a</td>
 					<td>No</td>
 				</tr>
@@ -1910,6 +1943,10 @@
 				</tr>
 			</tbody>
 		</table>
+		<h3>Supported Nested Tags:</h3>
+		<ul>
+			<li>filterchain</li>
+		</ul>
 		<h2>
 			<a name="PropertyPromptTask"></a>PropertyPromptTask </h2>
 		<p> PropertyPromptTask is a simple task to read in user input into a property. If you need
@@ -1981,7 +2018,7 @@
   &lt;/fileset&gt;
   &lt;filterchain&gt;
     &lt;replaceregexp&gt;
-      &lt;regexp pattern=&quot;\r\n&quot; replace=&quot;\n&quot;/&gt;
+      &lt;regexp pattern=&quot;\r(\n)&quot; replace=&quot;\1&quot;/&gt;
     &lt;/replaceregexp&gt;
   &lt;/filterchain&gt;
 &lt;/reflexive&gt;</pre>
@@ -2057,6 +2094,15 @@
 					<td>The name of the property to set with resolved (absolute) path.</td>
 					<td>n/a</td>
 					<td>Yes</td>
+				</tr>
+				<tr>
+					<td>level</td>
+					<td>String</td>
+					<td>Control the level at which status messages are reported. One of
+							<em>error</em>, <em>warning</em>, <em>info</em>, <em>verbose</em>,
+							<em>debug</em>.</td>
+					<td><em>verbose</em></td>
+					<td>No</td>
 				</tr>
 			</tbody>
 		</table>
@@ -2190,6 +2236,68 @@ file defines a task in the format: name=path.to.Task --&gt;
 			<li>fileset</li>
 		</ul>
 		<h2>
+			<a name="TryCatchTask"></a>TryCatchTask </h2>
+		<p>This task is a wrapper task that lets you run tasks(s)
+			when another set of tasks fails, mirroring PHP's
+			<em>try/catch</em> functionality (with the addition of
+			a <em>finally</em> block)</p>
+		<p>The tasks inside of the <em>try</em> block will always be
+			run. If one of them throws a BuildException, the
+			following things can happen:</p>
+		<ul>
+			<li>If there is no <em>catch</em> block, the
+			exception will be passed to Phing.</li>
+			<li>If the <em>property</em> attribute has been set,
+			a property of that name will contain the message of
+			the exception.</li>
+			<li>If there is a <em>catch</em> block, the nested
+			tasks will be run.</li>
+		</ul>
+		<p>If a <em>finally</em> block is present, the nested tasks
+			will be run regardless of whether the tasks in the
+			<em>try</em> block have thrown an exception or not.</p>
+		<p>This task was inspired by <a
+			href="http://ant-contrib.sourceforge.net/tasks/tasks/trycatch.html">http://ant-contrib.sourceforge.net/tasks/tasks/trycatch.html</a>.</p>
+		<h3>Example</h3>
+		<pre>&lt;trycatch property=&quot;foo&quot;&gt;
+    &lt;try&gt;
+        &lt;fail&gt;Tada!&lt;/fail&gt;
+    &lt;/try&gt;
+
+    &lt;catch&gt;
+        &lt;echo&gt;In catch.&lt;/echo&gt;
+    &lt;/catch&gt;
+		                
+    &lt;finally&gt;
+        &lt;echo&gt;In finally.&lt;/echo&gt;
+    &lt;/finally&gt;
+&lt;/trycatch&gt;
+
+&lt;echo&gt;As property: ${foo}&lt;/echo&gt;</pre>
+		<h3>Attributes</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Default</th>
+					<th>Required</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>property</td>
+					<td>String</td>
+					<td>Name of a property that will
+					receive the message of the exception
+					that has been caught (if any)</td>
+					<td>n/a</td>
+					<td>No</td>
+				</tr>
+			</tbody>
+		</table>
+		<h2>
 			<a name="TstampTask"></a>TstampTask </h2>
 		<p>Sets the DSTAMP, TSTAMP, and TODAY properties in the current project. By default, the
 			DSTAMP property is in the format "%Y%m%d", TSTAMP is in the format "%H%M", and TODAY is
@@ -2283,7 +2391,7 @@ file defines a task in the format: name=path.to.Task --&gt;
 		<h3>Example</h3>
 		<pre>&lt;!-- Includes the Type named &quot;CustomProject&quot; and makes it available by
      &lt;cproject&gt; --&gt;
-&lt;taskdef classname=&quot;user.types.CustomProject&quot; name=&quot;cproject&quot; /&gt;
+&lt;typedef classname=&quot;user.types.CustomProject&quot; name=&quot;cproject&quot; /&gt;
 </pre>
 		<h3>Attributes</h3>
 		<table>

@@ -26,7 +26,7 @@ require_once 'phing/system/io/FileOutputStream.php';
  * DocBlox Task (http://www.docblox-project.org)
  *
  * @author    Michiel Rook <mrook@php.net>
- * @version   $Revision$
+ * @version   $Id$
  * @since     2.4.6
  * @package   phing.tasks.ext.docblox
  */
@@ -43,6 +43,12 @@ class DocBloxTask extends Task
      * @var PhingFile
      */
     private $destDir = null;
+
+    /**
+     * name of the template to use
+     * @var string
+     */
+    private $template = "new_black";
     
     /**
      * Title of the project
@@ -83,6 +89,15 @@ class DocBloxTask extends Task
     public function setOutput(PhingFile $output)
     {
         $this->destDir = $output;
+    }
+
+    /**
+     * Sets the template to use
+     * @param strings $template
+     */
+    public function setTemplate($template)
+    {
+        $this->template = (string) $template;
     }
     
     /**
@@ -198,7 +213,7 @@ class DocBloxTask extends Task
         
         $transformer = new DocBlox_Transformer();
         $transformer->setTemplatesPath(DocBlox_Core_Abstract::config()->paths->templates);
-        $transformer->setTemplates(DocBlox_Core_Abstract::config()->transformations->template->name);
+        $transformer->setTemplates($this->template);
         $transformer->setSource($xml);
         $transformer->setTarget($this->destDir->getAbsolutePath());
         $transformer->execute();

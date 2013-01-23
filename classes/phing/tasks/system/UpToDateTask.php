@@ -34,7 +34,7 @@ include_once 'phing/mappers/MergeMapper.php';
  * @author    William Ferguson <williamf@mincom.com> (Ant)
  * @author    Hiroaki Nakamura <hnakamur@mc.neweb.ne.jp> (Ant)
  * @author    Stefan Bodewig <stefan.bodewig@epost.de> (Ant)
- * @version   $Revision$
+ * @version   $Id$
  * @package   phing.tasks.system
  */
 class UpToDateTask extends Task implements Condition {
@@ -154,15 +154,15 @@ class UpToDateTask extends Task implements Condition {
      * @return boolean
      */
     public function evaluate() {
-        if (count($this->sourceFileSets) === 0 && $this->_sourceFile === null) {
+        if (count($this->sourceFileSets) == 0 && count($this->_filelists) == 0 && $this->_sourceFile === null) {
             throw new BuildException("At least one srcfile or a nested "
-                                     . "<fileset> element must be set.");
+                                     . "<fileset> or <filelist> element must be set.");
         }
 
-        if (count($this->sourceFileSets) > 0 && $this->_sourceFile !== null) {
+        if ((count($this->sourceFileSets) > 0 || count($this->_filelists) > 0) && $this->_sourceFile !== null) {
             throw new BuildException("Cannot specify both the srcfile "
                                      . "attribute and a nested <fileset> "
-                                     . "element.");
+                                     . "or <filelist> element.");
         }
 
         if ($this->_targetFile === null && $this->mapperElement === null) {

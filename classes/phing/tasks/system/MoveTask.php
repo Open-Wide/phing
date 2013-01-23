@@ -35,7 +35,7 @@ include_once 'phing/system/io/IOException.php';
  * Source files and directories are only deleted when the file or
  * directory has been copied to the destination successfully.
  *
- * @version $Revision$
+ * @version $Id$
  * @package phing.tasks.system
  */
 class MoveTask extends CopyTask {
@@ -126,10 +126,9 @@ class MoveTask extends CopyTask {
 
         // handle empty dirs if appropriate
         if ($this->includeEmpty) {
-            $e = array_keys($this->dirCopyMap);
             $count = 0;
-            foreach ($e as $dir) {
-                $d = new PhingFile((string) $dir);
+            foreach ($this->dirCopyMap as $srcDir => $destDir) {
+                $d = new PhingFile((string) $destDir);
                 if (!$d->exists()) {
                     if (!$d->mkdirs()) {
                         $this->logError("Unable to create directory " . $d->getAbsolutePath());

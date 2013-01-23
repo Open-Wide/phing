@@ -88,6 +88,16 @@ class ApiGenTask extends Task
     }
 
     /**
+     * Sets list of allowed file extensions.
+     *
+     * @param string $extensions
+     */
+    public function setExtensions($extensions)
+    {
+        $this->options['extensions'] = explode(',', $extensions);
+    }
+
+    /**
      * Sets masks (case sensitive) to exclude files or directories from processing.
      *
      * @param string $exclude
@@ -399,7 +409,7 @@ class ApiGenTask extends Task
         // Execute ApiGen
         exec(escapeshellcmd($this->executable) . ' ' . $this->constructArguments(), $output, $return);
 
-        $logType = 0 === $return ? Project::MSG_VERBOSE : Project::MSG_ERR;
+        $logType = 0 === $return ? Project::MSG_INFO : Project::MSG_ERR;
         foreach ($output as $line) {
             $this->log($line, $logType);
         }

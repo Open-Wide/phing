@@ -20,15 +20,19 @@
  */
  
 /**
- *  Utility class for generating necessary server-specific SQL commands
+ * Utility class for generating necessary server-specific SQL commands
  *
- *  @author   Luke Crouch at SourceForge (http://sourceforge.net)
- *  @version  $Revision$
- *  @package  phing.tasks.ext.dbdeploy
+ * @author   Luke Crouch at SourceForge (http://sourceforge.net)
+ * @version  $Id$
+ * @package  phing.tasks.ext.dbdeploy
  */
-
 class DbmsSyntaxOracle extends DbmsSyntax 
 {
+    public function applyAttributes($db)
+    {
+        $db->setAttribute(PDO::ATTR_CASE, PDO::CASE_LOWER);
+    }
+    
     public function generateTimestamp()
     {
         return "(sysdate - to_date('01-JAN-1970','DD-MON-YYYY')) * (86400)";

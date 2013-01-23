@@ -28,7 +28,7 @@
  *
  * @author    Andreas Aderhold <andi@binarycloud.com>
  * @author    Hans Lellelid <hans@xmpl.org>
- * @version   $Revision$
+ * @version   $Id$
  * @package   phing
  */
 class RuntimeConfigurable {
@@ -97,7 +97,6 @@ class RuntimeConfigurable {
 
             if ($this->characters) {
                 ProjectConfigurator::addText($project, $this->wrappedObject, (string) $this->characters);
-                $this->characters="";
             }
             if ($id !== null) {
                 $project->addReference($id, $this->wrappedObject);

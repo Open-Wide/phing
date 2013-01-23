@@ -23,6 +23,7 @@
 include_once 'phing/types/Reference.php';
 include_once 'phing/types/Path.php';
 include_once 'phing/util/StringHelper.php';
+include_once 'phing/parser/CustomChildCreator.php';
 
 /**
  * Helper class that collects the methods that a task or nested element
@@ -37,7 +38,7 @@ include_once 'phing/util/StringHelper.php';
  * @author    Andreas Aderhold <andi@binarycloud.com>
  * @author    Hans Lellelid <hans@xmpl.org>
  * @copyright 2001,2002 THYRELL. All rights reserved
- * @version   $Revision$
+ * @version   $Id$
  * @package   phing
  */
 class IntrospectionHelper {
@@ -433,6 +434,14 @@ class IntrospectionHelper {
                 
                 $method->invoke($element, $nestedElement);
                                 
+            } catch (Exception $exc) {
+                throw new BuildException($exc);
+            }
+        } elseif ($this->bean->implementsInterface("CustomChildCreator")) {
+            $method = $this->bean->getMethod('customChildCreator');
+            
+            try {
+                $nestedElement = $method->invoke($element, strtolower($elementName), $project);
             } catch (Exception $exc) {
                 throw new BuildException($exc);
             }

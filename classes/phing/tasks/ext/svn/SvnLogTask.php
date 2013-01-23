@@ -27,7 +27,7 @@ require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
  * This stems from the SvnLastRevisionTask.
  *
  * @author Anton Stöckl <anton@stoeckl.de>
- * @author Michiel Rook <michiel.rook@gmail.com> (SvnLastRevisionTask)
+ * @author Michiel Rook <mrook@php.net> (SvnLastRevisionTask)
  * @version $Id$
  * @package phing.tasks.ext.svn
  * @see VersionControl_SVN
@@ -36,7 +36,6 @@ require_once 'phing/tasks/ext/svn/SvnBaseTask.php';
 class SvnLogTask extends SvnBaseTask
 {
     private $propertyName = "svn.log";
-    private $forceCompatible = true;
     private $limit = null;
 
     /**
@@ -57,11 +56,10 @@ class SvnLogTask extends SvnBaseTask
 
     /**
      * Sets whether to force compatibility with older SVN versions (< 1.2)
+     * @deprecated
      */
     public function setForceCompatible($force)
     {
-        //$this->forceCompatible = (bool) $force;
-        // see below, we need this to be true as xml mode does not work
     }
 
     /**
@@ -86,23 +84,25 @@ class SvnLogTask extends SvnBaseTask
             $switches['limit'] = $this->limit;
         }
 
-        if ($this->forceCompatible) {
-            $output = $this->run(array(), $switches);
-            $result = null;
-
+        $output = $this->run(array(), $switches);
+        $result = null;
+        
+        if ($this->oldVersion) {
             foreach ($output as $line) {
                 $result .= (!empty($result)) ? "\n" : '';
                 $result .= "{$line['REVISION']} | {$line['AUTHOR']}  | {$line['DATE']}  | {$line['MSG']}";
             }
-
-            if (!empty($result)) {
-                $this->project->setProperty($this->getPropertyName(), $result);
-            } else {
-                throw new BuildException("Failed to parse the output of 'svn log'.");
-            }
         } else {
-            // this is not possible at the moment as SvnBaseTask always uses fetchmode ASSOC
-            // which transfers everything into nasty assoc array instead of xml
+            foreach ($output['logentry'] as $line) {
+                $result .= (!empty($result)) ? "\n" : '';
+                $result .= "{$line['revision']} | {$line['author']}  | {$line['date']}  | {$line['msg']}";
+            }
+        }
+
+        if (!empty($result)) {
+            $this->project->setProperty($this->getPropertyName(), $result);
+        } else {
+            throw new BuildException("Failed to parse the output of 'svn log'.");
         }
     }
 }

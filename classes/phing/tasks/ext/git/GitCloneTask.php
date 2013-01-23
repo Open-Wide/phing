@@ -66,7 +66,7 @@ class GitCloneTask extends GitBaseTask
             );
         }
 
-        $client = $this->getGitClient(false, $this->getTargetPath());
+        $client = $this->getGitClient(false, getcwd());
 
         try {
             $client->createClone(
@@ -74,7 +74,7 @@ class GitCloneTask extends GitBaseTask
                 $this->isBare(), 
                 $this->getTargetPath());
         } catch (Exception $e) {
-            throw new BuildException('The remote end hung up unexpectedly');
+            throw new BuildException('The remote end hung up unexpectedly', $e);
         }
 
         $msg = 'git-clone: cloning ' 

@@ -19,13 +19,17 @@
  * and is licensed under the LGPL. For more information please see
  * <http://phing.info>.
  */
- 
+
+if (version_compare(PHP_VERSION, '5.3.2') < 0) {
+    define('E_DEPRECATED', 8192);
+}
+                             
 require_once 'PHPUnit/Framework/TestCase.php';
 require_once 'phing/BuildListener.php';
 require_once 'phing/system/io/PhingFile.php';
 
 /**
- * A BuildFileTest is a TestCase which executes targets from an Ant buildfile 
+ * A BuildFileTest is a TestCase which executes targets from a Phing buildfile 
  * for testing.
  * 
  * This class provides a number of utility methods for particular build file 
@@ -196,6 +200,7 @@ abstract class BuildFileTest extends PHPUnit_Framework_TestCase {
         $this->project->init();
         $f = new PhingFile($filename);
         $this->project->setUserProperty( "phing.file" , $f->getAbsolutePath() );
+        $this->project->setUserProperty( "phing.dir"  , dirname($f->getAbsolutePath()) );
         $this->project->addBuildListener(new PhingTestListener($this));
         ProjectConfigurator::configureProject($this->project, new PhingFile($filename));
     }
